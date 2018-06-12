@@ -1,19 +1,24 @@
 let app = angular.module('poiApp', ["ngRoute", 'LocalStorageModule']);
 
-app.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider)  {
+app.config(['$locationProvider', '$routeProvider','getCategories', function($locationProvider, $routeProvider,getCategories)  {
 
 
     $locationProvider.hashPrefix('');
 
 
     $routeProvider.when('/', {
-        templateUrl: 'components/home.html',
-        controller : 'formCtrl'
+        templateUrl: 'components/login.html',
+        controller : 'loginController',
+        
     })
  
-    $routeProvider.when('/forgot', {
-        templateUrl: 'components/forgot.html',
-        controller : 'forgetCtrl'
+    $routeProvider.when('/register', {
+        templateUrl: 'components/register.html',
+        controller : 'registerController'
+    })
+    $routeProvider.when('/poi', {
+        templateUrl: 'components/poi.html',
+        controller : 'poiController'
     })
 
     .otherwise({ redirectTo: '/' });
