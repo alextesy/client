@@ -12,21 +12,7 @@ angular.module('poiApp')
 
     //this.userName='shir'
 
+}]);
 
-}])  
-.service('getCategories',['$http',function($http){
-    
-    $http.get(serverUrl + "POI/allCategories")
-    .then(function(response){
-        $scope.categories=response.data
-    },
-    function (response) {
-        //Second function handles error
-        $scope.categories = "Something went wrong";
-    });
-    
-
-}]) 
-
-
+ 
     

@@ -54,9 +54,6 @@ angular.module('poiApp')
             $scope.countries = "Something went wrong";
         });
 
-        self.addTokenToLocalStorage = function () {
-            localStorageModel.addLocalStorage('token', self.token)
-        }
 
 }]);
 

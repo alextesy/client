@@ -1,10 +1,10 @@
 let app = angular.module('poiApp', ["ngRoute", 'LocalStorageModule']);
 
-app.config(['$locationProvider', '$routeProvider','getCategories', function($locationProvider, $routeProvider,getCategories)  {
+app.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider)  {
 
 
     $locationProvider.hashPrefix('');
-
+    
 
     $routeProvider.when('/', {
         templateUrl: 'components/login.html',

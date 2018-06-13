@@ -18,6 +18,9 @@ angular.module('poiApp')
         });
   
     };
+    self.addTokenToLocalStorage = function () {
+        localStorageModel.addLocalStorage('token', self.token)
+    }; 
     $scope.goToRegister= function () {
         
         $location.path('/register');
@@ -25,14 +28,12 @@ angular.module('poiApp')
 
     $http.get(serverUrl+'POI/RandomPOI/3/n/3')
     .then(function(response){
+        data = response.data
         randomImg=[];
-        randomImg.push(response.data[0].id);
-        randomImg.push(response.data[2].id);
-        randomImg.push(response.data[1].id);
-        for(var i=0;i<randomImg.length;i++){
-            $http.get()
-        }
-
+        randomImg.push(data[0][0].image);
+        randomImg.push(data[2][0].image);
+        randomImg.push(data[1][0].image);
+        $scope.randomImg = randomImg;
     },function(response){
         alert("something went wrong");
     })
