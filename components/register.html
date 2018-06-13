@@ -16,13 +16,13 @@
         Password:    <input type="password" ng-model="user.password" ng-required="true" required pattern = "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" title="enter at least one uppercase letter and digit"></br>
         Firset Name: <input type="text" ng-model="user.firstname" pattern="[A-Za-z]" title="characters only" required></br>
         Last Name:   <input type="text" ng-model="user.lastname" pattern="[A-Za-z]" title="characters only" required></br>
-        Country:     <select ng-model='user.country' ng-options="x.Name for x in countries.Countries.Country"></select></br>
+        Country:     <select ng-model='user.country' ng-options="x.Name for x in countries.Countries.Country" required></select></br>
         City:        <input type="text" ng-model="user.city" required ></br>
         Email:       <input type="email" ng-model="user.email" required></br>
         First question: <select ng-model="user.questions[0]" ng-options="x.question for x in questionslist" required></select >
-        answer: <input type="text" ng-model="user.answers[0]"></br>
+        answer: <input type="text" ng-model="user.answers[0]"required></br>
         Second question:<select ng-model="user.questions[1]" ng-options="x.question for x in questionslist" required></select>
-        answer: <input type="text" ng-model="user.answers[1]"></br>
+        answer: <input type="text" ng-model="user.answers[1]"required></br>
         Choose Your Favorite Categories: </br>
         <table>
         <tr ng-repeat="x in categories">
