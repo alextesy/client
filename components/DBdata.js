@@ -6,6 +6,7 @@ angular.module('poiApp')
     this.get = function () {
        return $http.get(serverUrl + "POI/allCategories")
         .then(function(response){
+            categories = response;
             return response
            
         },

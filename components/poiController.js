@@ -1,10 +1,20 @@
 angular.module('poiApp')
-.controller('poiController',['getCategories','$location','$scope','$http',function(getCategories,$location,$scope,$http) {
+.controller('poiController',['getCategories','getALLPOI','$location','$scope','$http',function(getCategories,getALLPOI,$location,$scope,$http) {
     let serverUrl='http://localhost:3000/'
     self=this;
     getCategories.get().then(function(response){
        $scope.categories = response.data;
+       getALLPOI.get()
+       .then(function(response){
+           $scope.pois = response.data;
+           for(var i =0; i <$scope.pois.length;i++){
+               for(var j = 0 ;j<$scope.categories.length;j++){
+                   if($scope.pois[i].categoryID == $scope.categories[j].ID)
+                        $scope.pois[i].category = $scope.categories[j].categories;       
+               }
+           }
+           console.log("");
+        })
     })
-
 }]);
 
