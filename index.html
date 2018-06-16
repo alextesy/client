@@ -7,15 +7,14 @@
     </head>
 
         <body ng-app="poiApp">
-            <div id="menu">
-                <header>
-                        Idan Razy -
-                        Alex Kremiansky
-                    </header>
+            <div id="menu" ng-init="user.startname='Guest'">
+               
                 <li><a href="#/">Home</a></li>
                 <li><a href="#/about">About</a></li>
                 <li><a href="#/poi">POI</a></li>
                 <li><a href="#/register">Register</a></li>
+                <p id='hello'>Hello {{user.startname}}<p>
+
 
             </div> 
 
