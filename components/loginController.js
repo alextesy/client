@@ -10,16 +10,32 @@ angular.module('poiApp')
             setHeadersToken.set(self.token)
             self.addTokenToLocalStorage();
             alert("success");
+            $scope.user.startname=$scope.user.username;
+            $http.post(serverUrl + "Users/log")
+            .then(function(result){
+                $scope.user.username=result.data.username;
+                $scope.user.firstname=result.data.FirstName;
+                $scope.user.lastame=result.data.LastName;
+                $scope.user.city=result.data.City;
+                $scope.user.country=result.data.Country;
+                $scope.user.email=result.data.Email;
+                $scope.user.categories=result.data.categories;
+                $location.path('/home');
+            })
             
 
         }, function (response) {
             //Second function handles error
-            alert("Something went wrong");
+            alert(response.data);
         });
   
     };
     self.addTokenToLocalStorage = function () {
-        localStorageModel.addLocalStorage('token', self.token)
+        token = localStorageModel.getLocalStorage('token');
+        if(token == undefined)
+            localStorageModel.addLocalStorage('token', self.token);
+        else
+            localStorageModel.updateLocalStorage('token',self.token);
     }; 
     $scope.goToRegister= function () {
         
@@ -35,7 +51,7 @@ angular.module('poiApp')
         randomImg.push(data[1][0].image);
         $scope.randomImg = randomImg;
     },function(response){
-        alert("something went wrong");
+        alert(response.data);
     })
 
 }]);

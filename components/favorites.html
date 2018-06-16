@@ -1,0 +1,42 @@
+</br>
+</br>
+</br>
+</br>
+</br>
+
+
+
+<h1>Your Favorites Point of Views</h1>
+
+
+<div ng-controller="loginController"></div>
+    <div class="album py-5 bg-light" >
+        <div>
+            <button class="btn btn-primary">click to save Favorites order</button>
+        </div>
+        <div class="container" ng-repeat="x in poiarray">
+               
+            <div class="row">
+            <div class="col-sm-4">
+            <div class="card sm-4 box-shadow">
+                    <p class="card-text">{{$index}} : </p>
+                <img class="card-img-top" ng-src="{{x.images[0].image}}" alt="Card image cap">
+                <div class="card-body">
+                <p class="card-text">{{x.poidetails[0].description}}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" ng-click="updatepostion_up($index)" class="btn btn-sm btn-outline-secondary" ng-show='$index !=0'>up</button>
+                    <button type="button"  ng-click="updatepostion_down($index)" class="btn btn-sm btn-outline-secondary" ng-show='$index !=poiarray.length-1' >down</button>
+                    </div>
+                    <small class="text-muted">9 mins</small>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</div>
+

@@ -16,5 +16,12 @@ angular.module('poiApp')
            console.log("");
         })
     })
+    $scope.clearfilter = function(){
+        $scope.cat_filter ="undefined";
+        $scope.name_filter ="";
+        $scope.rating_filter ="";
+        $scope.numv_filter ="";
+        
+    }
 }]);
 
