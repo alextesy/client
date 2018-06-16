@@ -1,4 +1,5 @@
 let app = angular.module('poiApp', ["ngRoute", 'LocalStorageModule']);
+let serverUrl='http://localhost:3000/';
 
 app.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider)  {
 
@@ -32,11 +33,27 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
 
         
 }])
-.run(['setHeadersToken',function(setHeadersToken){
+.run(['setHeadersToken','$location','$http','setUser',function(setHeadersToken,$location,$http,setUser){
     t = localStorage.getItem('ls.token');
-    t = t.substring(1);
-    t = t.substring(0,t.length-1);
-    if(t != undefined)
+    if (t){
+        t = t.substring(1);
+        t = t.substring(0,t.length-1);
         setHeadersToken.set(t);
+        $http.post(serverUrl+'Users/validation')
+        .then(function(result){
+            setUser.setUser()
+            .then(function(result){
+                $location.path('/home');
+            })
+
+        },function(err){
+            $location.path('/login');
+        })
+    }
+    else{
+        $location.path('/login');
+
+    }
+    
 
 }]);

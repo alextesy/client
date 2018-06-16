@@ -1,8 +1,10 @@
 angular.module('poiApp')
-.controller('homeCtrl', ['$location','$scope','$http','setHeadersToken','localStorageModel' ,function($location,$scope,$http,setHeadersToken,localStorageModel) {
+.controller('homeCtrl', ['$location','$scope','$http','setHeadersToken','localStorageModel','setUser' ,function($location,$scope,$http,setHeadersToken,localStorageModel,setUser) {
     let serverUrl='http://localhost:3000/'
     self=this;
     $scope.catImg=[];
+    $scope.user=setUser.getUser();
+
     var arrPromise=[];
     for(var i=0;i<2;i++){
         var url=serverUrl+'POI/MostpopularPOI/'+$scope.user.categories[i]+'/numbers/1';
