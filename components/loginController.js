@@ -23,6 +23,8 @@ angular.module('poiApp')
                 $scope.user.country=result.data.Country;
                 $scope.user.email=result.data.Email;
                 $scope.user.categories=result.data.categories;
+                $rootScope.login =true;
+                $rootScope.user = $scope.user;
                 $location.path('/home');
             })
             

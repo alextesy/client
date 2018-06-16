@@ -36,3 +36,29 @@ li a:hover:not(.active) {
     background-color: rgb(245, 229, 3);
     color: rgb(0, 0, 0);
 }
+/*.card-img-top {
+    height:450px;
+    width:100%;
+}
+*/
+.rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+  }
+  .rating > span {
+    display: inline-block;
+    position: relative;
+    width: 1.1em;
+  }
+  .rating > span:hover:before,
+  .rating > span:hover ~ span:before {
+     content: "\2605";
+     position: absolute;
+  }
+
+  .checked {
+    color: orange;
+}
+.fa fa-star{
+    height: 50px;
+}

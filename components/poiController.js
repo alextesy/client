@@ -4,6 +4,7 @@ angular.module('poiApp')
     self=this;
     getCategories.get().then(function(response){
        $scope.categories = response.data;
+       $scope.enabled = [];
        getALLPOI.get()
        .then(function(response){
            $scope.pois = response.data;
@@ -22,6 +23,14 @@ angular.module('poiApp')
         $scope.rating_filter ="";
         $scope.numv_filter ="";
         
+    }
+    $scope.checkpoi = function(index){
+        if($scope.enabled[index] == false){
+            $scope.enabled[index] = true;
+        }
+        else{
+            $scope.enabled[index] = false;
+        }
     }
 }]);
 

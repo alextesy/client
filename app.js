@@ -1,7 +1,7 @@
 let app = angular.module('poiApp', ["ngRoute", 'LocalStorageModule']);
 let serverUrl='http://localhost:3000/';
 
-app.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider)  {
+app.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider,Auth)  {
 
 
     $locationProvider.hashPrefix('');
@@ -9,8 +9,7 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
 
     $routeProvider.when('/', {
         templateUrl: 'components/login.html',
-        controller : 'loginController',
-        
+        controller : 'loginController'
     })
  
     $routeProvider.when('/register', {
@@ -49,13 +48,17 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
             })
 
         },function(err){
+            $rootScope.login=false;
+
             $location.path('/login');
         })
     }
     else{
+        $rootScope.login=false;
         $location.path('/login');
 
     }
     
 
 }]);
+

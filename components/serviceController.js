@@ -42,7 +42,7 @@ angular.module('poiApp')
     }
 
     return service;
-}]);
+}])
 
  
     

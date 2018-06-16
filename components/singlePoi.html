@@ -12,11 +12,12 @@
         <h4 class="modal-title">{{poi.name}}</h4>
       </div>
       <div class="modal-body">
+            <span ng-show="login" ng-click="checkpoi()" class="fa fa-star" ng-class="{checked: enabled}"></span>
             <img class="card-img-top" ng-src="{{poi.image}}" alt="Card image cap">
             <p>{{poi.description}}</p>
              <p>Num of views: {{poi.numOfViews}}</p>
             <p>Rating: {{poi.rating}}</p>
-            <table class="table" >
+            <table class="table" ng-hide="flag">
                     <thead class="thead-dark">
                     <tr >
                         <th scope="col">#</th>
@@ -33,18 +34,23 @@
                     </tr>
                     </tbody>
                 </table>
+                <div ng-hide="review">
+                  <form class="form-group" ng-submit="submitReview()">
+                          <label for="rating_label">Rating:</label>
+                          <input id="rating_label" type="text" ng-model="userRating"  class="form-control">
+                          <label for="review_label">Review:</label>
+                          <input id="review_label" type="textarea" ng-model="userReview" class="form-control">
+                          <div class="rating">
+                            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+                            </div>
+                          <input class="btn btn-primary" type="submit" value="submit" ng-click="submitReview()"/>
+                  </form>
+            </div>
 
       </div>
-      <div ng-hide="review">
-            <form ng-submit="submitReview()">
-                    Rating: <input type="text" ng-model="userRating">
-                    Review: <input type="text" ng-model="userReview">
-                    <input type="submit" value="submit" ng-click="submitReview()"/>
-            </form>
-      </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button ng-click="openreview()" ng-show:"login" type="button" class="btn btn-default">add review</button>
+        <button type="button" ng-click="cleareview()" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button ng-click="openreview()" ng-show="login" type="button" class="btn btn-default">add review</button>
     </div>
     </div>
 

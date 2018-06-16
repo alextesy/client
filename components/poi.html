@@ -18,6 +18,7 @@
                 <th scope="col">category <select type="text" ng-model = "cat_filter" ng-options="x.categories for x in categories"></select></th>
                 <th scope="col">rating <input type="text" ng-model="rating_filter"> </th>
                 <th scope="col"> numOfViews <input type="text" ng-model="numv_filter"> </th>
+                <th scope="col" ng-show="login"> favorites</th>
                 <th scope="col"> <button ng-click = "clearfilter()" >reset filter</button> </th>
                
 
@@ -30,6 +31,7 @@
                 <td>{{x.category}}</td>
                 <td>{{x.rating | number : 1}}</td>
                 <td>{{x.numOfViews}}</td>
+                <td ng-show="login" ng-click="checkpoi($index)" class="fa fa-star" ng-class="{checked: enabled[$index]}"></td>
             </tr>
             </tbody>
         </table>
