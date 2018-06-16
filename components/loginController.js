@@ -1,7 +1,10 @@
 angular.module('poiApp')
-.controller('loginController', ['$location','$scope','$http','setHeadersToken','localStorageModel' ,function($location,$scope,$http,setHeadersToken,localStorageModel) {
+.controller('loginController', ['$location','$scope','$http','setHeadersToken','localStorageModel','$rootScope' ,function($location,$scope,$http,setHeadersToken,localStorageModel,$rootScope) {
     let serverUrl='http://localhost:3000/'
     self=this;
+    $scope.sendPOI=function(id){
+        $rootScope.$broadcast('poi',id);
+    }
     $scope.submit_log=function(){
         $http.post(serverUrl + "Users/login", $scope.user)
         .then(function (response) {
@@ -46,9 +49,12 @@ angular.module('poiApp')
     .then(function(response){
         data = response.data
         randomImg=[];
-        randomImg.push(data[0][0].image);
+        randomImg.push(data[0][0]);
+        randomImg.push(data[2][0]);
+        randomImg.push(data[1][0]);
+        /*randomImg.push(data[0][0].image);
         randomImg.push(data[2][0].image);
-        randomImg.push(data[1][0].image);
+        randomImg.push(data[1][0].image);*/
         $scope.randomImg = randomImg;
     },function(response){
         alert(response.data);
