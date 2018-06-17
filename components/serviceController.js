@@ -86,7 +86,6 @@ angular.module('poiApp')
             localpoiarray = [];
         localpoiarray.push(poi);
         localStorageModel.updateLocalStorage('localpoiarray',localpoiarray);
-        localpoiarray=localStorageModel.getLocalStorage('localpoiarray');
     }
     self.remove_local_pois =function(poi){
         localpoiarray=localStorageModel.getLocalStorage('localpoiarray');

@@ -3,10 +3,11 @@ angular.module('poiApp')
     let serverUrl='http://localhost:3000/'
     self=this;
     $scope.review = true;
-    $scope.enabled = [];
+    
     console.log("single");
     $scope.$on('poi',function(response,oArgs){
         $scope.login = $rootScope.login;
+        $scope.enabled = {}
         $http.get(serverUrl+'POI/'+oArgs)
         .then(function(result){
             $scope.poi=result.data.poidetails[0];
