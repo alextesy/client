@@ -12,7 +12,7 @@
         <h4 class="modal-title">{{poi.name}}</h4>
       </div>
       <div class="modal-body">
-            <span ng-show="login" ng-click="checkpoi()" class="fa fa-star" ng-class="{checked: enabled}"></span>
+            <span ng-show="login" ng-click="checkpoi()" class="fa fa-star" ng-class="{checked: enabled[poi.ID]}"></span>
             <img class="card-img-top" ng-src="{{poi.image}}" alt="Card image cap">
             <p>{{poi.description}}</p>
              <p>Num of views: {{poi.numOfViews}}</p>

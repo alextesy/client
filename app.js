@@ -1,17 +1,15 @@
 let app = angular.module('poiApp', ["ngRoute", 'LocalStorageModule']);
 let serverUrl='http://localhost:3000/';
 
-app.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider,Auth)  {
+app.config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider)  {
 
 
     $locationProvider.hashPrefix('');
     
-
     $routeProvider.when('/', {
         templateUrl: 'components/login.html',
         controller : 'loginController'
     })
- 
     $routeProvider.when('/register', {
         templateUrl: 'components/register.html',
         controller : 'registerController'
@@ -34,13 +32,15 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
 }])
 .run(['setHeadersToken','$location','$http','setUser','$route','$rootScope',function(setHeadersToken,$location,$http,setUser,$route,$rootScope){
     t = localStorage.getItem('ls.token');
+    console.log("app run");
     if (t){
         t = t.substring(1);
         t = t.substring(0,t.length-1);
         setHeadersToken.set(t);
         $http.post(serverUrl+'Users/validation')
         .then(function(result){
-            setUser.setUser()
+            
+             setUser.setUser()
             .then(function(result){
                 $rootScope.login=true;
                 $rootScope.user = setUser.getUser();
@@ -58,7 +58,6 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
         $location.path('/login');
 
     }
-    
 
-}]);
+}])
 

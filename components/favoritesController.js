@@ -1,8 +1,15 @@
 angular.module("poiApp")
-    .controller('favoritesController', ['$location','$scope','$http',function($location,$scope,$http) {
+    .controller('favoritesController', ['$location','$scope','$http','localStorageModel',function($location,$scope,$http,localStorageModel) {
         let serverUrl='http://localhost:3000/'
         self=this;
-        
+        $scope.$on('addpoi',function(response,oArgs){
+            $scope.login = $rootScope.login;
+            $http.get(serverUrl+'POI/'+oArgs)
+            .then(function(response){
+              $scope.poiarray.push(response.data)
+               
+            })
+        });
         $http.get(serverUrl+'users/log/saved')
         .then(function(response){
             data = response.data;
@@ -32,7 +39,5 @@ angular.module("poiApp")
         $scope.save_order = function(){
             
             
-        }
-        
-
+        }        
     }]);

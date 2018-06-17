@@ -3,7 +3,8 @@ angular.module('poiApp')
     let serverUrl='http://localhost:3000/'
     self=this;
     $scope.review = true;
-   
+    $scope.enabled = [];
+    console.log("single");
     $scope.$on('poi',function(response,oArgs){
         $scope.login = $rootScope.login;
         $http.get(serverUrl+'POI/'+oArgs)
@@ -14,7 +15,7 @@ angular.module('poiApp')
             if($scope.poi.reviews.length==0){
                 $scope.flag=true;
             }
-            console.log("razy");
+           
         })
     });
     $scope.openreview = function(){
@@ -24,11 +25,13 @@ angular.module('poiApp')
         $scope.review = true;
     }
     $scope.checkpoi = function(){
-        if($scope.enabled == false){
-            $scope.enabled = true;
+        if($scope.enabled[$scope.poi.ID] == false){
+            $scope.enabled[$scope.poi.ID] = true;
+            var id = $scope.poi.ID; 
+            $rootScope.$broadcast('addpoi',id);
         }
         else{
-            $scope.enabled = false;
+            $scope.enabled[$scope.poi.ID] = false;
         }
     }
     $scope.submitReview=function(){

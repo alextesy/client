@@ -36,11 +36,12 @@ li a:hover:not(.active) {
     background-color: rgb(245, 229, 3);
     color: rgb(0, 0, 0);
 }
-/*.card-img-top {
-    height:450px;
+.card-img-top {
+    height:220px;
     width:100%;
+    display: block;
 }
-*/
+
 .rating {
     unicode-bidi: bidi-override;
     direction: rtl;
@@ -58,7 +59,4 @@ li a:hover:not(.active) {
 
   .checked {
     color: orange;
-}
-.fa fa-star{
-    height: 50px;
 }
