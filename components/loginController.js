@@ -26,9 +26,9 @@ angular.module('poiApp')
                 $rootScope.login =true;
                 $rootScope.user = $scope.user;
                 $location.path('/home');
+            },function(response){
+                alert(response.data);
             })
-            
-
         }, function (response) {
             //Second function handles error
             alert(response.data);
@@ -54,9 +54,6 @@ angular.module('poiApp')
         randomImg.push(data[0][0]);
         randomImg.push(data[2][0]);
         randomImg.push(data[1][0]);
-        /*randomImg.push(data[0][0].image);
-        randomImg.push(data[2][0].image);
-        randomImg.push(data[1][0].image);*/
         $scope.randomImg = randomImg;
     },function(response){
         alert(response.data);

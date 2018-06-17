@@ -13,6 +13,35 @@ angular.module('poiApp')
     //this.userName='shir'
 
 }])
+.service('Authservice',['setHeadersToken','$location','$http','setUser','$route','$rootScope',function(setHeadersToken,$location,$http,setUser,$route,$rootScope){   
+    self = this;
+    self.check = function(){
+        t = localStorage.getItem('ls.token');
+        if (t){
+            t = t.substring(1);
+            t = t.substring(0,t.length-1);
+            setHeadersToken.set(t);
+            return $http.post(serverUrl+'Users/validation')
+            .then(function(result){
+                     $rootScope.login=true;
+                     $location.path('/home');
+                     console.log("Auth");
+            },function(err){
+                $rootScope.login=false;
+                $location.path('/');
+                return;
+            })
+        }
+        else{
+            $rootScope.login=false;
+            $location.path('/');
+            return;
+
+        }
+    }
+   
+}])
+
 .factory('setUser',['$http',function($http){
     var user={};
     var service = {}
@@ -33,41 +62,12 @@ angular.module('poiApp')
                 reject(err);
             })
         })
-
-       
     };
     service.getUser=function(){
         return user;
     }
 
     return service;
-}])
-.service('Auth',['setHeadersToken','$location','$http','setUser','$route','$rootScope',function(setHeadersToken,$location,$http,setUser,$route,$rootScope){
-    t = localStorage.getItem('ls.token');
-    if (t){
-        t = t.substring(1);
-        t = t.substring(0,t.length-1);
-        setHeadersToken.set(t);
-        $http.post(serverUrl+'Users/validation')
-        .then(function(result){
-            setUser.setUser()
-            .then(function(result){
-                $rootScope.login=true;
-                $rootScope.user = setUser.getUser();
-                $location.path('/home');
-                return true;
-            })
-        },function(err){
-            $rootScope.login=false;
-            $location.path('/login');
-        })
-    }
-    else{
-        $rootScope.login=false;
-        $location.path('/login');
-
-    }
-   
 }])
 
  

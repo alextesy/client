@@ -8,7 +8,12 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
     
     $routeProvider.when('/', {
         templateUrl: 'components/login.html',
-        controller : 'loginController'
+        controller : 'loginController',
+        resolve:{
+            Auth:function(Authservice){
+                return Authservice.check();
+            }
+        }
     })
     $routeProvider.when('/register', {
         templateUrl: 'components/register.html',
@@ -27,7 +32,6 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
         controller : 'homeCtrl'
     })
     .otherwise({ redirectTo: '/' });
-
         
 }])
 .run(['setHeadersToken','$location','$http','setUser','$route','$rootScope',function(setHeadersToken,$location,$http,setUser,$route,$rootScope){
@@ -37,19 +41,20 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
         t = t.substring(1);
         t = t.substring(0,t.length-1);
         setHeadersToken.set(t);
-        $http.post(serverUrl+'Users/validation')
+        return $http.post(serverUrl+'Users/validation')
         .then(function(result){
             
-             setUser.setUser()
+             return setUser.setUser()
             .then(function(result){
                 $rootScope.login=true;
                 $rootScope.user = setUser.getUser();
                 $location.path('/home');
+                console.log("app run after promise");
+                return;
             })
 
         },function(err){
             $rootScope.login=false;
-
             $location.path('/login');
         })
     }
