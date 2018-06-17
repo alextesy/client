@@ -1,8 +1,11 @@
 angular.module('poiApp')
-.controller('homeCtrl', ['$location','$scope','$http','setHeadersToken','localStorageModel','setUser' ,function($location,$scope,$http,setHeadersToken,localStorageModel,setUser) {
+.controller('homeCtrl', ['$location','$scope','$http','setHeadersToken','localStorageModel','setUser','$rootScope' ,function($location,$scope,$http,setHeadersToken,localStorageModel,setUser,$rootScope) {
     
     let serverUrl='http://localhost:3000/'
     self=this;
+    $scope.sendPOI=function(id){
+        $rootScope.$broadcast('poi',id);
+    }
     setUser.setUser()
     .then(function(result){
         catImg=[];
@@ -21,11 +24,11 @@ angular.module('poiApp')
             }
              Promise.all(arrPromise2)
             .then(function(result2){
-                catImg.push(result2[0].data.images[0].image);
-                catImg.push(result2[1].data.images[0].image);
+                catImg.push({"image":result2[0].data.images[0].image,"ID":result2[0].data.poidetails[0].ID});
+                catImg.push({"image":result2[1].data.images[0].image,"ID":result2[1].data.poidetails[0].ID});
                 console.log("as");
                 $scope.catImg=catImg;
-                
+                $scope.showimgs = true;
     
             },function(err){
                 alert(err);

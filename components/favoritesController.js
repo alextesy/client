@@ -2,6 +2,7 @@ angular.module("poiApp")
     .controller('favoritesController', ['$location','$scope','$http','localStorageModel',function($location,$scope,$http,localStorageModel) {
         let serverUrl='http://localhost:3000/'
         self=this;
+        localpoiarray=[];
         $scope.$on('addpoi',function(response,oArgs){
             $scope.login = $rootScope.login;
             $http.get(serverUrl+'POI/'+oArgs)
@@ -10,6 +11,9 @@ angular.module("poiApp")
                
             })
         });
+        self.getlocalpoi = function(){
+
+        }
         $http.get(serverUrl+'users/log/saved')
         .then(function(response){
             data = response.data;
@@ -18,7 +22,6 @@ angular.module("poiApp")
                 $http.get(serverUrl+'POI/'+data[i].poiID)
                 .then((response)=>{
                     $scope.poiarray.push(response.data);
-                    console.log("")
                 });
             }
         },function(response){

@@ -1,5 +1,5 @@
 angular.module('poiApp')
-.controller('singlePoiCtrl',['getCategories','getALLPOI','$location','$scope','$http','$rootScope',function(getCategories,getALLPOI,$location,$scope,$http,$rootScope) {
+.controller('singlePoiCtrl',['getCategories','getALLPOI','$location','$scope','$http','$rootScope','localStorageModel','getlocalpois',function(getCategories,getALLPOI,$location,$scope,$http,$rootScope,localStorageModel,getlocalpois) {
     let serverUrl='http://localhost:3000/'
     self=this;
     $scope.review = true;
@@ -25,13 +25,17 @@ angular.module('poiApp')
         $scope.review = true;
     }
     $scope.checkpoi = function(){
+
         if($scope.enabled[$scope.poi.ID] == false){
             $scope.enabled[$scope.poi.ID] = true;
             var id = $scope.poi.ID; 
             $rootScope.$broadcast('addpoi',id);
+            getlocalpois.update_local_pois($scope.poi);
         }
         else{
             $scope.enabled[$scope.poi.ID] = false;
+            getlocalpois.remove_local_pois($scope.poi);
+        
         }
     }
     $scope.submitReview=function(){

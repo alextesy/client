@@ -70,5 +70,31 @@ angular.module('poiApp')
     return service;
 }])
 
- 
+.service('getlocalpois',['localStorageModel',function(localStorageModel){   
+    self = this;
+    let localpoiarray; 
+    self.get_local_pois= function(){
+        temp=localStorageModel.getLocalStorage('localpoiarray');
+        if(temp==null){
+            localpoiarray = temp;
+            return localpoiarray;
+            }
+    }
+    self.update_local_pois = function(poi){
+        localpoiarray=localStorageModel.getLocalStorage('localpoiarray');
+        if(localpoiarray==null)
+            localpoiarray = [];
+        localpoiarray.push(poi);
+        localStorageModel.updateLocalStorage('localpoiarray',localpoiarray);
+        localpoiarray=localStorageModel.getLocalStorage('localpoiarray');
+    }
+    self.remove_local_pois =function(poi){
+        localpoiarray=localStorageModel.getLocalStorage('localpoiarray');
+        if(localpoiarray!=null){
+            localpoiarray.splice(poi, 1);
+            localStorageModel.updateLocalStorage('localpoiarray',localpoiarray);
+        }
+    }
+   
+}])
     
