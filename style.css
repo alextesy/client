@@ -64,6 +64,13 @@ li a:hover:not(.active) {
   .checked {
     color: orange;
 }
-
+.poitable-td:hover{
+    background: yellow;
+    text-decoration: underline;
+}
 
 #mapid { height: 300px; width: 80%; }
+
+hr{
+    width: 100%;
+}

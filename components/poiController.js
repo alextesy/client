@@ -1,5 +1,5 @@
 angular.module('poiApp')
-.controller('poiController',['getCategories','getALLPOI','$location','$scope','$http',function(getCategories,getALLPOI,$location,$scope,$http) {
+.controller('poiController',['getCategories','getALLPOI','$location','$scope','$http','$rootScope',function(getCategories,getALLPOI,$location,$scope,$http,$rootScope) {
     let serverUrl='http://localhost:3000/'
     self=this;
     getCategories.get().then(function(response){
@@ -31,6 +31,9 @@ angular.module('poiApp')
         else{
             $scope.enabled[index] = false;
         }
+    }
+    $scope.sendPOI=function(id){
+        $rootScope.$broadcast('poi',id);
     }
 }]);
 

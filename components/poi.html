@@ -10,7 +10,7 @@
 <h1> Points Of Interest </h1>
 
 <div ng-controller="poiController">
-    <table ng-hide="flag" class="table" >
+    <table id="poitable" ng-hide="flag" class="table" >
             <thead class="thead-dark">
             <tr >
                 <th scope="col">#</th>
@@ -27,7 +27,7 @@
             <tbody ng-repeat="x in pois | filter:{name: name_filter, category:cat_filter.categories, rating:rating_filter,numOfViews:numv_filter} ">
             <tr>
                 <th scope="row">{{$index}}</th>
-                <td>{{x.name }}</td>
+                <td class="poitable-td" ng-click="sendPOI(x.ID)" data-toggle="modal" data-target="#myModal">{{x.name }}</td>
                 <td>{{x.category}}</td>
                 <td>{{x.rating | number : 1}}</td>
                 <td>{{x.numOfViews}}</td>
