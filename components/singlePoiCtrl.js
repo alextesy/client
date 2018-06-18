@@ -1,11 +1,18 @@
 angular.module('poiApp')
-.controller('singlePoiCtrl',['getCategories','getALLPOI','$location','$scope','$http','$rootScope','localStorageModel','getlocalpois',function(getCategories,getALLPOI,$location,$scope,$http,$rootScope,localStorageModel,getlocalpois) {
+.controller('singlePoiCtrl',['getCategories','getALLPOI','$location','$scope','$http','$rootScope','localStorageModel','getlocalpois','localdeletepois','dbpois',function(getCategories,getALLPOI,$location,$scope,$http,$rootScope,localStorageModel,getlocalpois,localdeletepois,dbpois) {
     let serverUrl='http://localhost:3000/'
     self=this;
     $scope.review = true;
     $scope.enabled = {};
-    $scope.flag = {};
-
+    $scope.flag = {};//if poi has reviews
+    $scope.checkIfExists=function(arr,poi){
+        for(var i=0;i<arr.length;i++){
+            if(arr[i].ID==poi.ID){
+                return true;
+            }
+        }
+        return false;
+    }
     console.log("single");
     $scope.$on('poi',function(response,oArgs){
         $scope.login = $rootScope.login;  
@@ -18,6 +25,12 @@ angular.module('poiApp')
                 $scope.flag[$scope.poi.ID]=true;
             }
             var localpois=getlocalpois.get_local_pois();
+            var Dbpois=dbpois.get_dbpois();
+            if(Dbpois){
+                for(var i=0;i<Dbpois.length;i++){
+                    $scope.enabled[Dbpois[i].ID]=true;
+                }
+            }
             if(localpois){
                 for(var i=0;i<localpois.length;i++){
                     $scope.enabled[localpois[i].ID]=true;
@@ -33,16 +46,22 @@ angular.module('poiApp')
         $scope.review = true;
     }
     $scope.checkpoi = function(){
+        var DBpois=dbpois.get_dbpois();
         if($scope.enabled[$scope.poi.ID] == false||!$scope.enabled[$scope.poi.ID]){
             $scope.enabled[$scope.poi.ID] = true;
             var id = $scope.poi.ID; 
-            $rootScope.$broadcast('addpoi',id);
-            getlocalpois.update_local_pois($scope.poi);
+            if(!$scope.checkIfExists(DBpois,$scope.poi)){
+                getlocalpois.update_local_pois($scope.poi);
+            }
         }
         else{
             $scope.enabled[$scope.poi.ID] = false;
-            getlocalpois.remove_local_pois($scope.poi);
-        
+            
+            if($scope.checkIfExists(DBpois,$scope.poi)){
+                localdeletepois.update_local_deletepois($scope.poi);
+            }
+            else
+                getlocalpois.remove_local_pois($scope.poi);
         }
     }
     $scope.submitReview=function(){

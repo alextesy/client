@@ -100,6 +100,67 @@ angular.module('poiApp')
             localStorageModel.updateLocalStorage('localpoiarray',localpoiarray);
         }
     }
-   
 }])
-    
+
+.service('localdeletepois',['localStorageModel',function(localStorageModel){   
+    self = this;
+    let localdeletepois; 
+    self.get_local_deletepois= function(){
+        temp=localStorageModel.getLocalStorage('localdeletepois');
+        if(temp){
+            localdeletepois = temp;
+            return localdeletepois;
+        }
+        return undefined;
+    }
+    self.update_local_deletepois = function(poi){
+        localdeletepois=localStorageModel.getLocalStorage('localdeletepois');
+        if(localdeletepois==null)
+            localdeletepois = [];
+            localdeletepois.push(poi);
+        localStorageModel.updateLocalStorage('localdeletepois',localdeletepois);
+    }
+    self.remove_local_deletepois =function(poi){
+        localdeletepois=localStorageModel.getLocalStorage('localdeletepois');
+        if(localdeletepois!=null){
+            for(var i=0;i<localdeletepois.length;i++){
+                if(poi.ID==localdeletepois[i].ID){
+                    localdeletepois.splice(i,1);
+                }
+            }
+            localStorageModel.updateLocalStorage('localdeletepois',localdeletepois);
+        }
+    }
+}])
+
+
+.service('dbpois',['localStorageModel',function(localStorageModel){   
+    self = this;
+    let dbpois; 
+    self.get_dbpois= function(){
+        temp=localStorageModel.getLocalStorage('dbpois');
+        if(temp){
+            dbpois = temp;
+            return dbpois;
+        }
+        return undefined;
+    }
+    self.update_dbpois = function(poi){
+        dbpois=localStorageModel.getLocalStorage('dbpois');
+        if(dbpois==null)
+            dbpois = [];
+            dbpois.push(poi);
+        localStorageModel.updateLocalStorage('dbpois',dbpois);
+    }
+    self.remove_dbpois =function(poi){
+        dbpois=localStorageModel.getLocalStorage('dbpois');
+        if(dbpois!=null){
+            for(var i=0;i<dbpois.length;i++){
+                if(poi.ID==dbpois[i].ID){
+                    dbpois.splice(i,1);
+                }
+            }
+            localStorageModel.updateLocalStorage('dbpois',dbpois);
+        }
+    }
+}])
