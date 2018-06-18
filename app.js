@@ -29,7 +29,7 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
     })
     $routeProvider.when('/home', {
         templateUrl: 'components/home.html',
-        controller : 'homeCtrl'
+        controller : 'homeCtrl',
     })
     .otherwise({ redirectTo: '/' });
         

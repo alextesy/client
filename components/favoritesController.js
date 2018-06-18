@@ -50,8 +50,10 @@ angular.module("poiApp")
                    
                 }
                 localPoi=getlocalpois.get_local_pois();
-                for(var i=0;i<localPoi.length;i++){
-                    $scope.poiarray[localPoi[i].ID]=localPoi[i];
+                if(localPoi){
+                    for(var i=0;i<localPoi.length;i++){
+                        $scope.poiarray[localPoi[i].ID]=localPoi[i];
+                    }
                 }
                 $scope.showimgs = true;
                 $scope.poiorder=Object.keys($scope.poiarray);

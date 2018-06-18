@@ -164,3 +164,46 @@ angular.module('poiApp')
         }
     }
 }])
+.service('dbpoisinit',['localStorageModel','$http','dbpois',function(localStorageModel,$http,dbpois){ 
+    self = this;
+    var checkIfExists=function(arr,poi){
+        for(var i=0;i<arr.length;i++){
+            if(arr[i].ID==poi.ID){
+                return true;
+            }
+        }
+        return false;
+    }
+    self.DBinit = function(){
+        $http.get(serverUrl+'users/log/saved')
+        .then(function(response){
+            data = response.data;
+            poiarray ={};
+            var promiseArr=[];
+        for(var i =0;i<data.length;i++){
+            promiseArr.push($http.get(serverUrl+'POI/'+data[i].poiID))             
+        }
+        Promise.all(promiseArr)
+        .then(function(result){
+            for(var i=0;i<result.length;i++){
+                var poi={};
+                poi=result[i].data.poidetails[0];
+                poi.image=result[i].data.images[0].image;
+                poi.reviews=result[i].reviews;
+                poiarray[poi.ID]=poi;
+                var Dbpois=dbpois.get_dbpois();
+                if(Dbpois){
+                    if(!checkIfExists(Dbpois,poi))
+                    dbpois.update_dbpois(poi);
+                }
+                else{
+                    dbpois.update_dbpois(poi);
+                }
+            }
+        
+        })
+        },function(response){
+            alert("something went wrong");
+        })
+    }
+}])

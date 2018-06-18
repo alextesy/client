@@ -1,5 +1,5 @@
 angular.module('poiApp')
-.controller('homeCtrl', ['$location','$scope','$http','setHeadersToken','localStorageModel','setUser','$rootScope' ,function($location,$scope,$http,setHeadersToken,localStorageModel,setUser,$rootScope) {
+.controller('homeCtrl', ['$location','$scope','$http','setHeadersToken','localStorageModel','setUser','$rootScope','dbpoisinit',function($location,$scope,$http,setHeadersToken,localStorageModel,setUser,$rootScope,dbpoisinit) {
     
     let serverUrl='http://localhost:3000/'
     self=this;
@@ -29,6 +29,7 @@ angular.module('poiApp')
                 console.log("as");
                 $scope.catImg=catImg;
                 $scope.showimgs = true;
+                dbpoisinit.DBinit();
                 $scope.$apply();
     
             },function(err){
