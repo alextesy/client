@@ -1,4 +1,4 @@
-#menu
+/*#menu
 {
   top: 0%;
   font-family: pacFont;
@@ -35,6 +35,10 @@ li a.active {
 li a:hover:not(.active) {
     background-color: rgb(245, 229, 3);
     color: rgb(0, 0, 0);
+}
+*/
+#username{
+    color: white;
 }
 .card-img-top {
     height:220px;
