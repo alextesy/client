@@ -36,7 +36,6 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
 }])
 .run(['setHeadersToken','$location','$http','setUser','$route','$rootScope',function(setHeadersToken,$location,$http,setUser,$route,$rootScope){
     t = localStorage.getItem('ls.token');
-    console.log("app run");
     if (t){
         t = t.substring(1);
         t = t.substring(0,t.length-1);
@@ -55,12 +54,12 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
 
         },function(err){
             $rootScope.login=false;
-            $location.path('/login');
+            $location.path('/');
         })
     }
     else{
         $rootScope.login=false;
-        $location.path('/login');
+        $location.path('/');
 
     }
 

@@ -3,18 +3,25 @@ angular.module('poiApp')
     let serverUrl='http://localhost:3000/'
     self=this;
     $scope.review = true;
-    
+    $scope.enabled = {};
+    $scope.flag = {};
+
     console.log("single");
     $scope.$on('poi',function(response,oArgs){
-        $scope.login = $rootScope.login;
-        $scope.enabled = {}
+        $scope.login = $rootScope.login;  
         $http.get(serverUrl+'POI/'+oArgs)
         .then(function(result){
             $scope.poi=result.data.poidetails[0];
             $scope.poi.image=result.data.images[0].image;
             $scope.poi.reviews=result.data.reviews;
             if($scope.poi.reviews.length==0){
-                $scope.flag=true;
+                $scope.flag[$scope.poi.ID]=true;
+            }
+            var localpois=getlocalpois.get_local_pois();
+            if(localpois){
+                for(var i=0;i<localpois.length;i++){
+                    $scope.enabled[localpois[i].ID]=true;
+                }
             }
            
         })
@@ -26,8 +33,7 @@ angular.module('poiApp')
         $scope.review = true;
     }
     $scope.checkpoi = function(){
-
-        if($scope.enabled[$scope.poi.ID] == false){
+        if($scope.enabled[$scope.poi.ID] == false||!$scope.enabled[$scope.poi.ID]){
             $scope.enabled[$scope.poi.ID] = true;
             var id = $scope.poi.ID; 
             $rootScope.$broadcast('addpoi',id);

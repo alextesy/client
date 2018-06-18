@@ -13,6 +13,7 @@ angular.module('poiApp')
     //this.userName='shir'
 
 }])
+
 .service('Authservice',['setHeadersToken','$location','$http','setUser','$route','$rootScope',function(setHeadersToken,$location,$http,setUser,$route,$rootScope){   
     self = this;
     self.check = function(){
@@ -36,11 +37,11 @@ angular.module('poiApp')
             $rootScope.login=false;
             $location.path('/');
             return;
-
         }
     }
    
 }])
+
 
 .factory('setUser',['$http',function($http){
     var user={};
@@ -75,10 +76,11 @@ angular.module('poiApp')
     let localpoiarray; 
     self.get_local_pois= function(){
         temp=localStorageModel.getLocalStorage('localpoiarray');
-        if(temp==null){
+        if(temp){
             localpoiarray = temp;
             return localpoiarray;
-            }
+        }
+        return undefined;
     }
     self.update_local_pois = function(poi){
         localpoiarray=localStorageModel.getLocalStorage('localpoiarray');
@@ -90,7 +92,11 @@ angular.module('poiApp')
     self.remove_local_pois =function(poi){
         localpoiarray=localStorageModel.getLocalStorage('localpoiarray');
         if(localpoiarray!=null){
-            localpoiarray.splice(poi, 1);
+            for(var i=0;i<localpoiarray.length;i++){
+                if(poi.ID==localpoiarray[i].ID){
+                    localpoiarray.splice(i,1);
+                }
+            }
             localStorageModel.updateLocalStorage('localpoiarray',localpoiarray);
         }
     }

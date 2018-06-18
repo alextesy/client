@@ -29,6 +29,7 @@ angular.module('poiApp')
                 console.log("as");
                 $scope.catImg=catImg;
                 $scope.showimgs = true;
+                $scope.$apply();
     
             },function(err){
                 alert(err);
