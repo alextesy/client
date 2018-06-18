@@ -60,3 +60,6 @@ li a:hover:not(.active) {
   .checked {
     color: orange;
 }
+
+
+#mapid { height: 300px; width: 80%; }
