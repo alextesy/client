@@ -12,7 +12,8 @@ angular.module("poiApp")
         id: 'mapbox.streets',
         accessToken: 'pk.eyJ1IjoicmF6eWlkIiwiYSI6ImNqaWtiOGUzazF3aWYza3FwejVsa2d4ZnoifQ.e20DpGD798sL470V93XvQg'
         }).addTo(mymap);
-
+        var marker = L.marker([	40.785091, -73.968285]).addTo(mymap);
+        marker.bindPopup("<b>Central Park!</b><br>I am a popup.").openPopup();
 
 
 
