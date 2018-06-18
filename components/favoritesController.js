@@ -37,7 +37,7 @@ angular.module("poiApp")
             Promise.all(promiseArr)
             .then(function(result){
                 var deletpois = localdeletepois.get_local_deletepois(); 
-                if(deletpois=="undefined")
+                if(deletpois==undefined)
                     deletpois = [];
                 for(var i=0;i<result.length;i++){
                     var poi={};
