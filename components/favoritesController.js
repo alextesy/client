@@ -5,7 +5,7 @@ angular.module("poiApp")
         $scope.poiorder=[];
         
         
-        var mymap = L.map('mapid').setView([40.782281, -73.969151], 13);
+        var mymap = L.map('mapid').setView([40.782281, -73.969151], 12);
         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
@@ -13,7 +13,9 @@ angular.module("poiApp")
         accessToken: 'pk.eyJ1IjoicmF6eWlkIiwiYSI6ImNqaWtiOGUzazF3aWYza3FwejVsa2d4ZnoifQ.e20DpGD798sL470V93XvQg'
         }).addTo(mymap);
 
-
+        $scope.sendPOI=function(id){
+            $rootScope.$broadcast('poi',id);
+        }
 
        $scope.checkIfExists=function(arr,poi){
            if(arr){
@@ -134,4 +136,17 @@ angular.module("poiApp")
                 marker.bindPopup("<b>"+poi[i].name +"!</b><br>I am a popup.").openPopup();        
             }
         }
+
+
+        function scrollmap(){
+            var element = document.getElementById("mapid");
+            var desiredPosition = 1000;
+            if(window.pageYOffset >= desiredPosition){
+               element.style.cssText += "position: fixed; top: auto; bottom: 20px; right: 20px; left: auto;"; 
+              }
+            else {
+               element.style.cssText += "position: relative; top: 20px; bottom: auto; right: auto; left: 20px;";  
+             } 
+           }
+           //window.onscroll = scrollmap;
     }]);

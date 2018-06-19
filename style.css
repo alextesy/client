@@ -1,42 +1,5 @@
-/*#menu
-{
-  top: 0%;
-  font-family: pacFont;
-	z-index: 100;
-	text-align: center;
-	display: inline-block;
-	list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: rgb(0, 0, 0);
-    position: fixed;
-	width: 100%;
-	left: 0;
-	font-size: 30px;
-}
-li {
-    display: inline-block;
-}
-li a {
 
-	display: block;
-    color: rgb(238, 255, 0);
-    text-align: center;
-    padding: 8px 16px;
-    text-decoration: none;
-}
 
-li a.active {
-    background-color: #4CAF50;
-    color: white;
-}
-
-li a:hover:not(.active) {
-    background-color: rgb(245, 229, 3);
-    color: rgb(0, 0, 0);
-}
-*/
 #username{
     color: white;
 }
@@ -75,8 +38,69 @@ hr{
     width: 100%;
 }
 
-.logout:hover{
-    position:left;
-    cursor:pointer;
-    text-decoration: underline;
-}
+.list-ic a {
+    color: #788288;
+    text-decoration: none;
+  }
+  .list-ic li {
+    position: relative;
+  }
+  .list-ic li span {
+    display: inline-block;
+    font-weight: 800;
+    width: 2em;
+    height: 2em;
+    text-align: center;
+    line-height: 2em;
+    border-radius: 1em;
+    background:#ff6d63;
+    color: white;
+    position: relative;
+  }
+  .list-ic li::before {
+    content: '';
+    position: absolute;
+    background: #ff6d63;
+    z-index: -1;
+  }
+  .list-ic.horizontal li {
+    display: inline-block;
+  }
+  .list-ic.horizontal li span {
+    margin: 0 1em;
+  }
+  .list-ic.horizontal li::before {
+    top: 0.9em;
+    left: -25px;
+    width: 4em;
+    height: 0.2em;
+  }
+  .list-ic.vertical {
+    padding: 0;
+    margin: 0;
+  }
+  .list-ic.vertical li {
+    list-style-type: none;
+    text-align: left;
+  }
+  .list-ic.vertical li span {
+    margin: 1.4em 0;
+  }
+  .list-ic.vertical li::before {
+    top: -35px;
+    left: 13px;
+    width: 0.2em;
+    height: 4em;
+  }
+  .list-ic li:first-child::before {
+    display: none;
+  }
+  .list-ic .active {
+    background: dodgerblue;
+  }
+  .list-ic .active ~ li {
+    background: lightblue;
+  }
+  .list-ic .active ~ li::before {
+    background: lightblue;
+  }

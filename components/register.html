@@ -10,28 +10,67 @@
 
 
 <div ng-controller="registerController">
-    <form  name="register" ng-submit="submit_reg()"><h1>Register</h1> 
-    </br>
-        Username:    <input type="text" ng-model="user.username"  required ></br>
-        Password:    <input type="password" ng-model="user.password" ng-required="true" required pattern = "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" title="enter at least one uppercase letter and digit"></br>
-        Firset Name: <input type="text" ng-model="user.firstname" pattern="[A-Za-z]" title="characters only" required></br>
-        Last Name:   <input type="text" ng-model="user.lastname" pattern="[A-Za-z]" title="characters only" required></br>
-        Country:     <select ng-model='user.country' ng-options="x.Name for x in countries.Countries.Country" required></select></br>
-        City:        <input type="text" ng-model="user.city" required ></br>
-        Email:       <input type="email" ng-model="user.email" required></br>
-        First question: <select ng-model="user.questions[0]" ng-options="x.question for x in questionslist" required></select >
-        answer: <input type="text" ng-model="user.answers[0]"required></br>
-        Second question:<select ng-model="user.questions[1]" ng-options="x.question for x in questionslist" required></select>
-        answer: <input type="text" ng-model="user.answers[1]"required></br>
-        Choose Your Favorite Categories: </br>
-        <table>
-        <tr ng-repeat="x in categories">
-            <td>{{x.categories}}</td><td><input  type="checkbox" ng-model="x.checked" value="true" ></td>
-        </tr>
-        </table>
-        <input type="submit" value="Register" />
-        {{selectedquestion1}}
-        {{selectedquestion2}}
-    </form>
-
+    <div class= "container">
+        <form  name="register" ng-submit="submit_reg()"><h1>Register</h1> 
+        </br>
+            <div class="form-group">
+                <label for="regusername"> Username:</label>    
+                <input name="regusername" type="text" id="regusername"  ng-model="user.username"  class="form-control" placeholder="Enter username" ng-minlength="3" ng-maxlength="8"  required ></br>
+                <p ng-if="!register.regusername.$valid" style="color:red;">username must be between 3 to 8 letters</p>
+            </div>
+            <div class="form-group">
+                <label for="passreg">Password:  </label>     
+                <input type="password" name="passreg"  id="passreg" class="form-control" placeholder="Enter password"  ng-model="user.password" ng-minlength="5" ng-maxlength="10" ng-required="true" required pattern = "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" title="enter at least one uppercase letter and digit"></br>
+                <p ng-if="!register.passreg.$valid" style="color:red;">password must be between 5 to 10 letters</p>
+            </div>
+            <div class="form-group">   
+                Firset Name: 
+                <input type="text"  class="form-control" placeholder="Enter First Name"  ng-model="user.password"  ng-model="user.firstname" pattern="[A-Za-z]" title="characters only" required></br>
+            </div>
+            <div class="form-group">      
+                Last Name:   
+                <input type="text"   class="form-control" placeholder="Enter Last Name"  ng-model="user.password"  ng-model="user.lastname" pattern="[A-Za-z]" title="characters only" required></br>
+            </div>
+            <div class="form-group">   
+                Country:   
+                <select ng-model='user.country'  class="form-control" placeholder="Enter username"  ng-model="user.password"  ng-options="x.Name for x in countries.Countries.Country" required></select></br>
+            </div> 
+            <div class="form-group">      
+                City:        
+                <input type="text" class="form-control" placeholder="Enter City" ng-model="user.city" required ></br>
+            </div>
+            <div class="form-group">      
+                Email:       
+                <input type="email" class="form-control" placeholder="bob@gmail.com" ng-model="user.email" required></br>
+            </div>
+            <div class="form-group">       
+                First question: 
+                <select class="form-control"  ng-model="user.questions[0]" ng-options="x.question for x in questionslist" required></select >
+            </div>
+            <div class="form-group">   
+                answer: 
+                <input class="form-control" placeholder="Enter First Answer" type="text" ng-model="user.answers[0]"required></br>
+            </div>
+            <div class="form-group"> 
+                Second question:
+                <select class="form-control" ng-model="user.questions[1]" ng-options="x.question for x in questionslist" required></select>
+            </div>  
+            <div class="form-group"> 
+                answer: 
+                <input type="text" class="form-control" placeholder="Enter Second Answer" ng-model="user.answers[1]"required></br>
+            <div class="form-group"> 
+            </div> 
+                Choose Your Favorite Categories: </br>
+                <table>
+                <tr ng-repeat="x in categories">
+                    <td>{{x.categories}}</td><td><input  type="checkbox" ng-model="x.checked" value="true" ></td>
+                </tr>
+                </table>
+                <br>
+                <br>
+                <input type="submit" class="btn btn-primary" value="Register" />
+                {{selectedquestion1}}
+                {{selectedquestion2}}
+        </form>
+    </div>
 </div>

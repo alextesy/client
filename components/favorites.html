@@ -6,42 +6,61 @@
 
 
 
-<h1>Your Favorites Point of Views</h1>
 
 
 
-<div ng-controller="loginController"></div>
 
+<div ng-controller="loginController">
+  
+        <div class="container text-center">
+                <h1  class="text-center">Your Favorites Point of Views</h1>
+                <br>
+                <button ng-click="save_order()" class="btn btn-secondary center-block ">click to save Favorites order</button>
+                <br>
+                <br>
+                <br>
+                <img ng-src=" https://media.giphy.com/media/fAxJoWdIK7kSQ/giphy.gif">  
+            </div>
     <div class="album py-5 bg-light" >
-        <div>
-            <button ng-click="save_order()" class="btn btn-secondary">click to save Favorites order</button>
-        </div>
+        
         <br>
-        <div class="container" ng-repeat="x in poiorder " ng-show="showimgs">
-                <div class="row">
-                    <div class="col">
-                <div class="row">
-                <div class="col-sm-4">
-                <div class="card sm-4 box-shadow">
-                    <p class="card-text">{{$index}} : </p>
-                    <img class="card-img-top" ng-src="{{poiarray[x].image}}" alt="Card image cap">
-                <div class="card-body">
-                <p class="card-text">{{poiarray[x].name}}</p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" ng-click="updatepostion_up($index)" class="btn btn-sm btn-outline-secondary" ng-show='$index !=0'>up</button>
-                    <button type="button"  ng-click="updatepostion_down($index)" class="btn btn-sm btn-outline-secondary" ng-show='$index !=poiarray.length-1' >down</button>
+        <div class="container">
+                <h1  class="text-center">Build your trip with Points of Views</h1>
+                <br>
+                <br>
+            <div class="row">
+                <div class="col">
+                    <div class="container" ng-repeat="x in poiorder " ng-show="showimgs">
+                        <div class="row">
+                                <ul class="list-ic vertical">
+                                        <li><span>{{$index}}</span></li></ul>
+                            <div class="col-sm-8">
+                                <div class="card sm-8 box-shadow mt-3">
+                                    <img class="card-img-top" ng-src="{{poiarray[x].image}}" alt="Card image cap">
+                                <div class="card-body">
+                                    <p class="card-text">{{poiarray[x].name}}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <button type="button" ng-click="sendPOI(poiarray[x].ID)" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal">View</button>
+                                            <button type="button" ng-click="updatepostion_up($index)" class="btn btn-sm btn-outline-secondary" ng-show='$index !=0'>up</button>
+                                            <button type="button"  ng-click="updatepostion_down($index)" class="btn btn-sm btn-outline-secondary" ng-show='$index !=poiarray.length-1' >down</button>
+                                        </div>
+                            
+                                    </div>
+                                </div>
+                                </div>  
+                            </div>
+                           
+                        </div>
                     </div>
-                
                 </div>
+                <div class="col">
+                        <div id="mapid" ng-show="showimgs"></div>  
                 </div>
             </div>
-            </div>
         </div>
-        </div>
-    </div>
-    </div>
-    <div id="mapid" ng-show="showimgs"></div>
+       
+</div>
+
 </div>
 
