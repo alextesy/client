@@ -12,8 +12,6 @@ angular.module("poiApp")
         id: 'mapbox.streets',
         accessToken: 'pk.eyJ1IjoicmF6eWlkIiwiYSI6ImNqaWtiOGUzazF3aWYza3FwejVsa2d4ZnoifQ.e20DpGD798sL470V93XvQg'
         }).addTo(mymap);
-        var marker = L.marker([	40.785091, -73.968285]).addTo(mymap);
-        marker.bindPopup("<b>Central Park!</b><br>I am a popup.").openPopup();
 
 
 
@@ -65,6 +63,7 @@ angular.module("poiApp")
                 }
                 $scope.showimgs = true;
                 $scope.poiorder=Object.keys($scope.poiarray);
+                $scope.addmarker($scope.poiarray);
                 $scope.$apply();
 
             })
@@ -89,4 +88,10 @@ angular.module("poiApp")
             
             
         }        
+        $scope.addmarker = function(poi){
+            for(var i in poi){
+                var marker = L.marker([	poi[i].latitude, poi[i].longitude]).addTo(mymap);
+                marker.bindPopup("<b>"+poi[i].name +"!</b><br>I am a popup.").openPopup();        
+            }
+        }
     }]);
