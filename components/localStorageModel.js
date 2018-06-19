@@ -26,7 +26,15 @@ angular.module("poiApp")
             localStorageService.remove(key);
             localStorageService.set(key,value);
         }
+        self.deleteLocalStorage = function ()
+        {
+            localStorageService.remove("dbpois");
+            localStorageService.remove("localdeletepois");
+            localStorageService.remove("localpoiarray");
+            localStorageService.remove("token");
 
+        }
+        
 
 
     }]);

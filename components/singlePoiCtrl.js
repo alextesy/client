@@ -6,10 +6,13 @@ angular.module('poiApp')
     $scope.enabled = {};
     $scope.flag = {};//if poi has reviews
     $scope.checkIfExists=function(arr,poi){
-        for(var i=0;i<arr.length;i++){
-            if(arr[i].ID==poi.ID){
-                return true;
+        if(arr){
+            for(var i=0;i<arr.length;i++){
+                if(arr[i].ID==poi.ID){
+                    return true;
+                }
             }
+            return false;
         }
         return false;
     }
@@ -26,17 +29,18 @@ angular.module('poiApp')
             }
             var localpois=getlocalpois.get_local_pois();
             var Dbpois=dbpois.get_dbpois();
-            if(Dbpois){
-                for(var i=0;i<Dbpois.length;i++){
-                    $scope.enabled[Dbpois[i].ID]=true;
-                }
+            var deletepois=localdeletepois.get_local_deletepois();
+            if($scope.checkIfExists(Dbpois,$scope.poi)){
+                    if(!$scope.checkIfExists(deletepois,$scope.poi)){
+                        $scope.enabled[$scope.poi.ID]=true;
+                    }
+                
             }
-            if(localpois){
-                for(var i=0;i<localpois.length;i++){
-                    $scope.enabled[localpois[i].ID]=true;
-                }
+            else if($scope.checkIfExists(localpois,$scope.poi)){
+                    $scope.enabled[$scope.poi.ID]=true;
             }
-           
+
+
         })
     });
     $scope.openreview = function(){
@@ -47,11 +51,15 @@ angular.module('poiApp')
     }
     $scope.checkpoi = function(){
         var DBpois=dbpois.get_dbpois();
+        var deletepoi=localdeletepois.get_local_deletepois();
         if($scope.enabled[$scope.poi.ID] == false||!$scope.enabled[$scope.poi.ID]){
             $scope.enabled[$scope.poi.ID] = true;
             var id = $scope.poi.ID; 
             if(!$scope.checkIfExists(DBpois,$scope.poi)){
                 getlocalpois.update_local_pois($scope.poi);
+            }
+            else if($scope.checkIfExists(deletepoi,$scope.poi)){
+                localdeletepois.remove_local_deletepois($scope.poi);
             }
         }
         else{

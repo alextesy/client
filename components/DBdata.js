@@ -18,7 +18,7 @@ angular.module('poiApp')
     }
     return this;
 
-    //this.userName='shir'
+  
 
 }])
 .service('getALLPOI',['$http', function ($http) {
@@ -28,8 +28,14 @@ angular.module('poiApp')
     this.get = function () {
        return $http.get(serverUrl + "POI/allPOIs")
         .then(function(response){
-            return response
-           
+            var promiseArr=[];
+            for(var i=0;i<response.data.length;i++){
+                promiseArr.push($http.get(serverUrl + "POI/"+response.data[i].ID));
+            }
+            return Promise.all(promiseArr)
+            .then(function(result){
+                return result
+            })
         },
         function (response) {
             //Second function handles error

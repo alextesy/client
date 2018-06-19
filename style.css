@@ -74,3 +74,9 @@ li a:hover:not(.active) {
 hr{
     width: 100%;
 }
+
+.logout:hover{
+    position:left;
+    cursor:pointer;
+    text-decoration: underline;
+}

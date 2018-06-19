@@ -117,7 +117,12 @@ angular.module('poiApp')
         localdeletepois=localStorageModel.getLocalStorage('localdeletepois');
         if(localdeletepois==null)
             localdeletepois = [];
-            localdeletepois.push(poi);
+        for(var i=0;i<localdeletepois.length;i++){
+            if(poi.ID==localdeletepois[i].ID){
+                return;
+            }
+        }
+        localdeletepois.push(poi);
         localStorageModel.updateLocalStorage('localdeletepois',localdeletepois);
     }
     self.remove_local_deletepois =function(poi){

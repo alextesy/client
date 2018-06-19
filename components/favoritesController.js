@@ -1,5 +1,5 @@
 angular.module("poiApp")
-    .controller('favoritesController', ['$location','$scope','$http','localStorageModel','getlocalpois','dbpois','localdeletepois',function($location,$scope,$http,localStorageModel,getlocalpois,dbpois,localdeletepois) {
+    .controller('favoritesController', ['$location','$scope','$http','localStorageService','getlocalpois','dbpois','localdeletepois',function($location,$scope,$http,localStorageService,getlocalpois,dbpois,localdeletepois) {
         let serverUrl='http://localhost:3000/'
         self=this;
         $scope.poiorder=[];
@@ -16,6 +16,7 @@ angular.module("poiApp")
 
 
        $scope.checkIfExists=function(arr,poi){
+           if(arr){
             for(var i=0;i<arr.length;i++){
                 console.log(arr[i].ID);
                 if(arr[i].ID==poi.ID){
@@ -23,14 +24,20 @@ angular.module("poiApp")
                 }
             }
             return false;
+            }
+            return false;
+
         }
 
         $http.get(serverUrl+'users/log/saved')
             .then(function(response){
                 data = response.data;
+                poiDict={};
+
                 $scope.poiarray ={};
                 var promiseArr=[];
             for(var i =0;i<data.length;i++){
+                poiDict[data[i].poiID]=data[i].savedOrder;
                 promiseArr.push($http.get(serverUrl+'POI/'+data[i].poiID))             
             }
             Promise.all(promiseArr)
@@ -43,7 +50,8 @@ angular.module("poiApp")
                     poi=result[i].data.poidetails[0];
                     poi.image=result[i].data.images[0].image;
                     poi.reviews=result[i].reviews;
-                    if(!$scope.checkIfExists(deletpois,poi.ID))
+                    poi.order=poiDict[poi.ID];
+                    if(!$scope.checkIfExists(deletpois,poi))
                         $scope.poiarray[poi.ID]=poi;
                     var Dbpois=dbpois.get_dbpois();
                     if(Dbpois){
@@ -55,6 +63,7 @@ angular.module("poiApp")
                     }
                    
                 }
+                
                 localPoi=getlocalpois.get_local_pois();
                 if(localPoi){
                     for(var i=0;i<localPoi.length;i++){
@@ -85,8 +94,39 @@ angular.module("poiApp")
             $scope.poiorder[index] = temp;
         }
         $scope.save_order = function(){
-            
-            
+            var localPoi=getlocalpois.get_local_pois();
+            if(localPoi){
+                for(var i=0;i<localPoi.length;i++){
+                    localPromiseArr.push($http.post(serverUrl+'users/log/POI',{'poiID':localPoi[i].ID}))
+                }
+                Promise.all(localPromiseArr)
+                .then(function(result){
+                    $http.post(serverUrl+'users/log/savedPOIOrder',{'pois':$scope.poiorder})
+                    .then(function(result){
+                        localStorageService.remove('localpoiarray');
+                        localStorageService.remove('localdeletepois');
+                        localStorageService.remove('dbpois');
+    
+                        alert("pois saved successfully");
+                        $location.path('/favorites')
+                    },function(result){
+                        alert("Something went wrong");
+                    })
+                    
+                })
+            }
+            else{
+                $http.post(serverUrl+'users/log/savedPOIOrder',{'pois':$scope.poiorder})
+                .then(function(result){
+                    localStorageService.remove('localpoiarray');
+                    localStorageService.remove('localdeletepois');
+                    localStorageService.remove('dbpois');
+
+                    alert("pois saved successfully");
+                },function(result){
+                    alert("Something went wrong");
+                })
+            }
         }        
         $scope.addmarker = function(poi){
             for(var i in poi){

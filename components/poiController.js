@@ -1,19 +1,49 @@
 angular.module('poiApp')
-.controller('poiController',['getCategories','getALLPOI','$location','$scope','$http','$rootScope',function(getCategories,getALLPOI,$location,$scope,$http,$rootScope) {
+.controller('poiController',['getCategories','getALLPOI','$location','$scope','$http','$rootScope','getlocalpois','localdeletepois','dbpois',function(getCategories,getALLPOI,$location,$scope,$http,$rootScope,getlocalpois,localdeletepois,dbpois) {
     let serverUrl='http://localhost:3000/'
     self=this;
     getCategories.get().then(function(response){
+        $scope.checkIfExists=function(arr,poi){
+            if(arr){
+                for(var i=0;i<arr.length;i++){
+                    if(arr[i].ID==poi.ID){
+                        return true;
+                    }
+                }
+                return false;
+            }
+            return false;
+        }
        $scope.categories = response.data;
        $scope.enabled = [];
        getALLPOI.get()
        .then(function(response){
-           $scope.pois = response.data;
+           var poiArr=[]
+           for (var i=0;i<response.length;i++){
+                var poi=response[i].data.poidetails[0];
+                poi.image=response[i].data.images[0].image;
+                poi.reviews=response[i].data.reviews;
+                poiArr.push(poi);
+           }
+            var localpois=getlocalpois.get_local_pois();
+            var Dbpois=dbpois.get_dbpois();
+            var deletepois=localdeletepois.get_local_deletepois();
+           $scope.pois = poiArr;
            for(var i =0; i <$scope.pois.length;i++){
                for(var j = 0 ;j<$scope.categories.length;j++){
                    if($scope.pois[i].categoryID == $scope.categories[j].ID)
                         $scope.pois[i].category = $scope.categories[j].categories;       
                }
            }
+           for(var i =0; i <$scope.pois.length;i++){
+               if($scope.checkIfExists(Dbpois,$scope.pois[i])&&!$scope.checkIfExists(deletepois,$scope.pois[i])){ 
+                    $scope.enabled[i]= true;
+                }
+                else if($scope.checkIfExists(localpois,$scope.pois[i])){
+                    $scope.enabled[i]=true;
+                }
+            }
+
            console.log("");
         })
     })
@@ -25,11 +55,25 @@ angular.module('poiApp')
         
     }
     $scope.checkpoi = function(index){
-        if($scope.enabled[index] == false){
+        var DBpois=dbpois.get_dbpois();
+        var deletepoi=localdeletepois.get_local_deletepois();
+        if($scope.enabled[index] == false||!$scope.enabled[index]){
             $scope.enabled[index] = true;
+            if(!$scope.checkIfExists(DBpois,$scope.pois[index])){
+                getlocalpois.update_local_pois($scope.pois[index]);
+            }
+            else if($scope.checkIfExists(deletepoi,$scope.pois[index])){
+                localdeletepois.remove_local_deletepois($scope.pois[index]);
+            }
         }
         else{
             $scope.enabled[index] = false;
+            
+            if($scope.checkIfExists(DBpois,$scope.pois[index])){
+                localdeletepois.update_local_deletepois($scope.pois[index]);
+            }
+            else
+                getlocalpois.remove_local_pois($scope.pois[index]);
         }
     }
     $scope.sendPOI=function(id){

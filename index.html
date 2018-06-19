@@ -9,7 +9,7 @@
             crossorigin=""/>
         </head>
         
-        <body ng-app="poiApp">
+        <body ng-app="poiApp" ng-controller="indexCtrl">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" ng-init="user.startname='Guest'">
                         <a class="navbar-brand" href="#">Home</a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,13 +24,13 @@
                               <a class="nav-link" href="#/poi">POI</a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link disabled" href="#/register" ng-hide="login">register</a>
+                              <a class="nav-link disabled" href="#/register" ng-hide="login">Register</a>
                             </li>
                             <li class="nav-item">
-                                    <a class="nav-link disabled" href="#/favorites" ng-show="login">favoritis</a>
+                                    <a class="nav-link disabled" href="#/favorites" ng-show="login">Favorites</a>
                             </li>
                           </ul>
-                          <span id="username" class = "navbar-text ml-auto" ng-show="login">logout</span>
+                          <span id="username" class="logout" href="#" class = "navbar-text ml-auto" ng-click="deleteLocalStorage()" ng-show="login">Logout</span>
                         </div>
                     </nav>
                       
@@ -64,6 +64,7 @@
             <script src="components/DBdata.js"></script>
             <script src ="components/favoritesController.js"></script>
             <script src ="components/singlePoiCtrl.js"></script>
+            <script src ="indexCtrl.js"></script>
 
       
             <!--Bootstrap -->
