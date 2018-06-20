@@ -30,10 +30,10 @@
                                     <a class="nav-link disabled" href="#/favorites" ng-show="login">Favorites</a>
                             </li>
                           </ul>
-                          <span id="username" class="logout" href="#" class = "navbar-text ml-auto" ng-click="deleteLocalStorage()" ng-show="login">Logout</span>
+                          <span id="username" class="logout" href="#" class = "navbar-text ml-auto" ng-click="deleteLocalStorage()" ng-show="login" style="cursor: pointer;" >Logout</span>
                         </div>
                         <div class="button" ng-show="login">
-                            <i ng-click="gotofavorites()" class="fa fa-map-marker"></i>
+                            <i ng-click="gotofavorites()" class="fa fa-map-marker" style="font-size: 1.73em; cursor: pointer;"></i>
                             <span class="button__badge" ng-model="counterpoi">{{counterpoi}}</span>
                           </div>
                     </nav>

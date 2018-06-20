@@ -18,7 +18,8 @@ angular.module('poiApp')
         //post request
         $http.post(serverUrl + "users/register",$scope.user)
             .then(function(response){
-                alert("sucsses");
+                alert("Now you may login");
+                $location.path('/');
             },function (response){
                 alert("Something went wrong");
             }

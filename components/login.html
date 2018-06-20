@@ -6,6 +6,7 @@
 
 
 
+<h1 > Hello Guest </h1>
 
 <h1 class="text-center"> Login </h1>
 <br>
@@ -15,15 +16,16 @@
     <form ng-submit="submit_log()">
         Username: <input type="text" ng-model="user.username" required>
         Password: <input type="password" ng-model="user.password" required>
-        <input type="submit" value="Login" />
+        <input type="submit" value="Login" class="btn btn-secondry" />
 
     </form>
     <p><a href='#/forgot'>Forgot Password</a></p>
-    <button ng-click='goToRegister()'>Register</button>
+    <button class="btn btn-secondry" ng-click='goToRegister()'>Register</button>
     </div>
        
 </div>
-
+<br>
+<br>
 <div ng-controller="loginController">
         <div class="album py-5 bg-light" >
                 <div class="container">

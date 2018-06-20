@@ -97,6 +97,7 @@ angular.module("poiApp")
         }
         $scope.save_order = function(){
             var localPoi=getlocalpois.get_local_pois();
+            var localPromiseArr=[];
             if(localPoi){
                 for(var i=0;i<localPoi.length;i++){
                     localPromiseArr.push($http.post(serverUrl+'users/log/POI',{'poiID':localPoi[i].ID}))
@@ -118,6 +119,7 @@ angular.module("poiApp")
                 })
             }
             else{
+
                 $http.post(serverUrl+'users/log/savedPOIOrder',{'pois':$scope.poiorder})
                 .then(function(result){
                     localStorageService.remove('localpoiarray');
@@ -129,6 +131,23 @@ angular.module("poiApp")
                     alert("Something went wrong");
                 })
             }
+            var localDeletePoi=localdeletepois.get_local_deletepois();
+            if(localDeletePoi){
+                var deleteArr=[];
+                for(var i=0;i<localDeletePoi.length;i++){
+                    //var pro=$http({url:serverUrl+'users/log/POI', method:'DELETE', data:{'poiID': localDeletePoi[i].ID}});
+                    var pro=$http.post(serverUrl+'users/log/deletePOI',{'poiID': localDeletePoi[i].ID})
+                    deleteArr.push(pro);
+
+                }
+                Promise.all(deleteArr)
+                .then(function(result){
+                    console.log("deleted");
+                },function(err){
+                    alert("Something went wrong");
+                })
+            }
+            $location.path('/favorites');
         }        
         $scope.addmarker = function(poi){
             for(var i in poi){

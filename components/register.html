@@ -16,20 +16,22 @@
             <div class="form-group">
                 <label for="regusername"> Username:</label>    
                 <input name="regusername" type="text" id="regusername"  ng-model="user.username"  class="form-control" placeholder="Enter username" ng-minlength="3" ng-maxlength="8"  required ></br>
-                <p ng-if="!register.regusername.$valid" style="color:red;">username must be between 3 to 8 letters</p>
+                <p ng-show="register.regusername.$error.minlength" style="color:red;">username must be atleast 3 letters</p>
+                <p ng-show="register.regusername.$error.maxlength" style="color:red;">username must be max 8 letters</p>
             </div>
             <div class="form-group">
-                <label for="passreg">Password:  </label>     
+                <label for="passreg">Password:</label>     
                 <input type="password" name="passreg"  id="passreg" class="form-control" placeholder="Enter password"  ng-model="user.password" ng-minlength="5" ng-maxlength="10" ng-required="true" required pattern = "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" title="enter at least one uppercase letter and digit"></br>
-                <p ng-if="!register.passreg.$valid" style="color:red;">password must be between 5 to 10 letters</p>
+                <p ng-show="register.passreg.$error.minlength" style="color:red;">username must be atleast 3 letters</p>
+                <p ng-show="register.passreg.$error.maxlength" style="color:red;">username must be max 8 letters</p>
             </div>
             <div class="form-group">   
                 Firset Name: 
-                <input type="text"  class="form-control" placeholder="Enter First Name"   ng-model="user.firstname" pattern="[A-Za-z]" title="characters only" required></br>
+                <input type="text"  class="form-control" placeholder="Enter First Name"   ng-model="user.firstname" pattern="[A-Za-z]+" title="characters only" required></br>
             </div>
             <div class="form-group">      
                 Last Name:   
-                <input type="text"   class="form-control" placeholder="Enter Last Name"   ng-model="user.lastname" pattern="[A-Za-z]" title="characters only" required></br>
+                <input type="text"   class="form-control" placeholder="Enter Last Name"   ng-model="user.lastname" pattern="[A-Za-z]+" title="characters only" required></br>
             </div>
             <div class="form-group">   
                 Country:   
