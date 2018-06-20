@@ -33,7 +33,7 @@
                           <span id="username" class="logout" href="#" class = "navbar-text ml-auto" ng-click="deleteLocalStorage()" ng-show="login">Logout</span>
                         </div>
                         <div class="button" ng-show="login">
-                            <i class="fa fa-map-marker"></i>
+                            <i ng-click="gotofavorites()" class="fa fa-map-marker"></i>
                             <span class="button__badge" ng-model="counterpoi">{{counterpoi}}</span>
                           </div>
                     </nav>

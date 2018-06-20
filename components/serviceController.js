@@ -180,7 +180,7 @@ angular.module('poiApp')
         return false;
     }
     self.DBinit = function(){
-        $http.get(serverUrl+'users/log/saved')
+        return $http.get(serverUrl+'users/log/saved')
         .then(function(response){
             data = response.data;
             poiarray ={};
@@ -188,7 +188,7 @@ angular.module('poiApp')
         for(var i =0;i<data.length;i++){
             promiseArr.push($http.get(serverUrl+'POI/'+data[i].poiID))             
         }
-        Promise.all(promiseArr)
+        return Promise.all(promiseArr)
         .then(function(result){
             for(var i=0;i<result.length;i++){
                 var poi={};
@@ -205,6 +205,7 @@ angular.module('poiApp')
                     dbpois.update_dbpois(poi);
                 }
             }
+            return;
         
         })
         },function(response){

@@ -1,5 +1,5 @@
 angular.module('poiApp')
-.controller('poiController',['getCategories','getALLPOI','$location','$scope','$http','$rootScope','getlocalpois','localdeletepois','dbpois',function(getCategories,getALLPOI,$location,$scope,$http,$rootScope,getlocalpois,localdeletepois,dbpois) {
+.controller('poiController',['getCategories','getALLPOI','$location','$scope','$http','$rootScope','getlocalpois','localdeletepois','dbpois','updatecounter',function(getCategories,getALLPOI,$location,$scope,$http,$rootScope,getlocalpois,localdeletepois,dbpois,updatecounter) {
     let serverUrl='http://localhost:3000/'
     self=this;
     getCategories.get().then(function(response){
@@ -75,6 +75,7 @@ angular.module('poiApp')
             else
                 getlocalpois.remove_local_pois($scope.pois[index]);
         }
+        updatecounter.update();
     }
     $scope.sendPOI=function(id){
         $rootScope.$broadcast('poi',id);

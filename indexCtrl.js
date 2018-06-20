@@ -5,6 +5,9 @@ angular.module('poiApp')
         localStorage.clear();
         $location.path('/');
     }
+    $scope.gotofavorites = function(){
+        $location.path('/favorites');
+    }
 
 
 }])

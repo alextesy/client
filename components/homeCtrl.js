@@ -30,8 +30,10 @@ angular.module('poiApp')
                 console.log("as");
                 $scope.catImg=catImg;
                 $scope.showimgs = true;
-                dbpoisinit.DBinit();
-                updatecounter.update();
+                dbpoisinit.DBinit()
+                .then(function(result){
+                    updatecounter.update();
+                })
                 $scope.$apply();
     
             },function(err){
