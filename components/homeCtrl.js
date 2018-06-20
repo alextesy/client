@@ -1,5 +1,5 @@
 angular.module('poiApp')
-.controller('homeCtrl', ['$location','$scope','$http','setHeadersToken','localStorageModel','setUser','$rootScope','dbpoisinit',function($location,$scope,$http,setHeadersToken,localStorageModel,setUser,$rootScope,dbpoisinit) {
+.controller('homeCtrl', ['$location','$scope','$http','setHeadersToken','localStorageModel','setUser','$rootScope','dbpoisinit','updatecounter',function($location,$scope,$http,setHeadersToken,localStorageModel,setUser,$rootScope,dbpoisinit,updatecounter) {
     
     let serverUrl='http://localhost:3000/'
     self=this;
@@ -10,6 +10,7 @@ angular.module('poiApp')
     .then(function(result){
         catImg=[];
         $scope.user=setUser.getUser();
+        $rootScope.user=$scope.user; 
         var arrPromise=[];
         for(var i=0;i<2;i++){
             var url=serverUrl+'POI/MostpopularPOI/'+$scope.user.categories[i]+'/numbers/1';
@@ -30,6 +31,7 @@ angular.module('poiApp')
                 $scope.catImg=catImg;
                 $scope.showimgs = true;
                 dbpoisinit.DBinit();
+                updatecounter.update();
                 $scope.$apply();
     
             },function(err){

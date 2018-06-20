@@ -32,20 +32,12 @@
                           </ul>
                           <span id="username" class="logout" href="#" class = "navbar-text ml-auto" ng-click="deleteLocalStorage()" ng-show="login">Logout</span>
                         </div>
+                        <div class="button" ng-show="login">
+                            <i class="fa fa-map-marker"></i>
+                            <span class="button__badge" ng-model="counterpoi">{{counterpoi}}</span>
+                          </div>
                     </nav>
-                      
-            <!-- <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <div class="navbar-header" ng-init="user.startname='Guest'"></div>
-                        <ul class="nav navbar-nav">
-                            <li><a href="#/">Home</a></li>
-                            <li><a href="#/about">About</a></li>
-                            <li><a href="#/poi">POI</a></li>
-                            <li><a href="#/register" ng-hide="login">Register</a></li>
-                            <li><a href="#/favorites"  ng-show="login">favoritis POI</a></li>
-                        </ul>
-                    </div> 
-            </nav> -->
+
             <div ng-view></div>
             <div ng-controller="singlePoiCtrl" ng-include="'components/singlePoi.html'"></div>
 

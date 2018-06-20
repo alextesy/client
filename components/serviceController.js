@@ -212,3 +212,28 @@ angular.module('poiApp')
         })
     }
 }])
+.service('updatecounter',['$rootScope','getlocalpois','dbpois','localdeletepois',function($rootScope,getlocalpois,dbpois,localdeletepois){
+
+    self = this;
+    self.update = function(){
+    var localpois=getlocalpois.get_local_pois();
+    var Dbpois=dbpois.get_dbpois();
+    var deletepois=localdeletepois.get_local_deletepois();
+    if(localpois!=undefined)
+        x1 = localpois.length
+    else
+        x1 = 0;
+    if(Dbpois!=undefined)
+        x2 = Dbpois.length
+    else
+        x2 = 0;
+    
+    if(deletepois!=undefined)
+        x3 = deletepois.length
+    else
+        x3 = 0;
+    
+    $rootScope.counterpoi = x1+x2-x3;
+    console.log("");
+    }
+}])

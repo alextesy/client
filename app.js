@@ -34,7 +34,7 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
     .otherwise({ redirectTo: '/' });
         
 }])
-.run(['setHeadersToken','$location','$http','setUser','$route','$rootScope',function(setHeadersToken,$location,$http,setUser,$route,$rootScope){
+.run(['setHeadersToken','$location','$http','setUser','$route','$rootScope','updatecounter',function(setHeadersToken,$location,$http,setUser,$route,$rootScope,updatecounter){
     t = localStorage.getItem('ls.token');
     if (t){
         t = t.substring(1);
@@ -49,6 +49,7 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
                 $rootScope.user = setUser.getUser();
                 $location.path('/home');
                 console.log("app run after promise");
+                updatecounter.update();
                 return;
             })
 

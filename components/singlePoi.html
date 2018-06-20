@@ -37,7 +37,7 @@
                     </tbody>
                 </table>
                 <div ng-hide="review">
-                  <form class="form-group" ng-submit="submitReview()">
+                  <form class="form-group" ng-submit="submitReview(userRating,userReview)">
                           <label for="rating_label">Rating:</label>
                           <input id="rating_label" type="text" ng-model="userRating"  class="form-control">
                           <label for="review_label">Review:</label>
@@ -45,7 +45,7 @@
                           <div class="rating">
                             <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
                             </div>
-                          <input class="btn btn-primary" type="submit" value="submit" ng-click="submitReview()"/>
+                          <input class="btn btn-primary" type="submit" value="submit"/>
                   </form>
             </div>
 

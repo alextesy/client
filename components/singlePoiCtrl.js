@@ -1,5 +1,5 @@
 angular.module('poiApp')
-.controller('singlePoiCtrl',['getCategories','getALLPOI','$location','$scope','$http','$rootScope','localStorageModel','getlocalpois','localdeletepois','dbpois',function(getCategories,getALLPOI,$location,$scope,$http,$rootScope,localStorageModel,getlocalpois,localdeletepois,dbpois) {
+.controller('singlePoiCtrl',['getCategories','getALLPOI','$location','$scope','$http','$rootScope','localStorageModel','getlocalpois','localdeletepois','dbpois','updatecounter',function(getCategories,getALLPOI,$location,$scope,$http,$rootScope,localStorageModel,getlocalpois,localdeletepois,dbpois,updatecounter) {
     let serverUrl='http://localhost:3000/'
     self=this;
     $scope.review = true;
@@ -71,19 +71,23 @@ angular.module('poiApp')
             else
                 getlocalpois.remove_local_pois($scope.poi);
         }
+        updatecounter.update();
     }
-    $scope.submitReview=function(){
-        if($scope.userReview){
-            var post={poiID:$scope.poi.poiID,
-                review:$scope.userReview}
-            $http.post(serverUrl+'log/review',post);
+    $scope.submitReview=function(userRating,userReview){
+        if(userReview){
+            var post={poiID:$scope.poi.ID,
+                review:userReview}
+            $http.post(serverUrl+'users/log/review',post);
         }
-        if($scope.userRating){
-            var post={poiID:$scope.poi.poiID,
-                rating:$scope.userRating}
-            $http.post(serverUrl+'log/rating');
+        if(userRating){
+            var post={poiID:$scope.poi.ID,
+                rating:userRating}
+            $http.post(serverUrl+'users/log/rating',post);
 
         }
+        alert("pois saved successfully");
+        $scope.review = false;
+    
             
     }
 
