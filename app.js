@@ -31,6 +31,10 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
         templateUrl: 'components/home.html',
         controller : 'homeCtrl',
     })
+    $routeProvider.when('/forgot', {
+        templateUrl: 'components/forgot.html',
+        controller : 'forgotCtrl',
+    })
     .otherwise({ redirectTo: '/' });
         
 }])

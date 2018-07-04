@@ -7,18 +7,35 @@
 
 
 
-<h1> You Stupid Poi </h1>
 
 
-<!--<div ng-controller="formCtrl">
-    <form ng-submit="submit()">
-        Username: <input type="text" ng-model="user.username">
-        Password: <input type="password" ng-model="user.password">
-        <input type="submit" value="Login" />
 
-    </form>
-    <p><a href='#/forgot'>Forgot Password</a></p>
-    <button>Register</button>
 
-</div>-->
+<div ng-controller="forgotCtrl">
+    <div class= "container">
+        <h1> restore password </h1>
+        </br>
+        <form ng-submit="submit()">
+            <div class ="form-group">
+            Username: <input type="text" class="form-control" ng-model="user.username">
+            </div><br>
+            <div class="form-group">       
+                    First question: 
+                    <select class="form-control"  ng-model="user.questions[0]" ng-options="x.question for x in questionslist" required></select >
+            </div>
+            <div class ="form-group">
+                    First Answer: <input type="text" class="form-control" ng-model="user.answer[0]">
+            </div><br>
+            <div class="form-group"> 
+                    Second question:
+                    <select class="form-control" ng-model="user.questions[1]" ng-options="x.question for x in questionslist" required></select>
+            </div>  
+            <div class ="form-group">
+                    Second Answer: <input type="text" class="form-control" ng-model="user.answer[1]">
+            </div><br>
+            <input type="submit" class="btn btn-primary" value="restore" />
+
+        </form>
+    </div>
+</div>
               

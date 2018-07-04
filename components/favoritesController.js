@@ -72,8 +72,20 @@ angular.module("poiApp")
                         $scope.poiarray[localPoi[i].ID]=localPoi[i];
                     }
                 }
+
+                var order = [];
+                for (key in $scope.poiarray){
+                    order[order.length] = [$scope.poiarray[key].ID,$scope.poiarray[key].order];
+                }
+                order.sort(function(x,y){
+                    return x[1] > y[1] ? 1 : -1;
+                });
+                for(var i = 0 ;i <order.length;i++){
+                    $scope.poiorder[i]= order[i][0];
+                }
+                
                 $scope.showimgs = true;
-                $scope.poiorder=Object.keys($scope.poiarray);
+                //$scope.poiorder=Object.keys($scope.poiarray);
                 $scope.addmarker($scope.poiarray);
                 $scope.$apply();
 
