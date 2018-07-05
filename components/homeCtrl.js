@@ -42,6 +42,27 @@ angular.module('poiApp')
             
     
         })
+
+        $http.get(serverUrl+'users/log/2LastSaved')
+        .then(function(result3){
+            var lastSavedimg=[];
+            var arrLastSaved=[];
+            for(var i=0;i<2;i++){
+                var urlSaved=serverUrl+'POI/'+result3.data[i].poiID;
+                arrLastSaved.push($http.get(urlSaved));
+            }
+            Promise.all(arrLastSaved)
+            .then(function(result4){
+                lastSavedimg.push({"image":result4[0].data.images[0].image,"ID":result4[0].data.poidetails[0].ID});
+                lastSavedimg.push({"image":result4[1].data.images[0].image,"ID":result4[1].data.poidetails[0].ID});
+                $scope.lastSavedimg=lastSavedimg;
+                $scope.showimgs = true;
+                $scope.$apply();
+    
+            },function(err){
+                alert(err);
+            })
+        })
     })
 
 
