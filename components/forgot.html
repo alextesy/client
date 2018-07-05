@@ -17,21 +17,21 @@
         </br>
         <form ng-submit="submit()">
             <div class ="form-group">
-            Username: <input type="text" class="form-control" ng-model="user.username">
+            Username: <input type="text" class="form-control" ng-model="user.username" required>
             </div><br>
             <div class="form-group">       
                     First question: 
-                    <select class="form-control"  ng-model="user.questions[0]" ng-options="x.question for x in questionslist" required></select >
+                    <select required class="form-control"  ng-model="user.questions[0]" ng-options="x.question for x in questionslist" ></select >
             </div>
             <div class ="form-group">
-                    First Answer: <input type="text" class="form-control" ng-model="user.answer[0]">
+                    First Answer: <input type="text" class="form-control" ng-model="user.answer[0]" required>
             </div><br>
             <div class="form-group"> 
                     Second question:
                     <select class="form-control" ng-model="user.questions[1]" ng-options="x.question for x in questionslist" required></select>
             </div>  
             <div class ="form-group">
-                    Second Answer: <input type="text" class="form-control" ng-model="user.answer[1]">
+                    Second Answer: <input type="text" class="form-control" ng-model="user.answer[1]" required>
             </div><br>
             <input type="submit" class="btn btn-primary" value="restore" />
 

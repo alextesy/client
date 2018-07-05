@@ -27,7 +27,7 @@ angular.module('poiApp')
             .then(function(result2){
                 catImg.push({"image":result2[0].data.images[0].image,"ID":result2[0].data.poidetails[0].ID});
                 catImg.push({"image":result2[1].data.images[0].image,"ID":result2[1].data.poidetails[0].ID});
-                console.log("as");
+              
                 $scope.catImg=catImg;
                 $scope.showimgs = true;
                 dbpoisinit.DBinit()

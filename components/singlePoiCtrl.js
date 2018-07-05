@@ -16,7 +16,7 @@ angular.module('poiApp')
         }
         return false;
     }
-    console.log("single");
+  
     $scope.$on('poi',function(response,oArgs){
         $scope.login = $rootScope.login;  
         $http.get(serverUrl+'POI/'+oArgs)

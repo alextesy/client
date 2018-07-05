@@ -7,7 +7,7 @@ angular.module('poiApp')
         token = t
         $http.defaults.headers.common[ 'x-access-token' ] = t
         // $httpProvider.defaults.headers.post[ 'x-access-token' ] = token
-        console.log("set")
+  
     }
 
     //this.userName='shir'
@@ -26,7 +26,7 @@ angular.module('poiApp')
             .then(function(result){
                      $rootScope.login=true;
                      $location.path('/home');
-                     console.log("Auth");
+               
             },function(err){
                 $rootScope.login=false;
                 $location.path('/');
@@ -235,6 +235,6 @@ angular.module('poiApp')
         x3 = 0;
     
     $rootScope.counterpoi = x1+x2-x3;
-    console.log("");
+  
     }
 }])

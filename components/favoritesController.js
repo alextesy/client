@@ -180,4 +180,5 @@ angular.module("poiApp")
              } 
            }
            //window.onscroll = scrollmap;
+      
     }]);

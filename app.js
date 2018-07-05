@@ -52,7 +52,7 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
                 $rootScope.login=true;
                 $rootScope.user = setUser.getUser();
                 $location.path('/home');
-                console.log("app run after promise");
+            
                 updatecounter.update();
                 return;
             })
