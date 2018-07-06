@@ -3,7 +3,7 @@ angular.module('poiApp')
     let serverUrl='http://localhost:3000/'
     self=this;
     $scope.user={};
-    //$scope.selcetedcat = {};
+    $scope.totalSelected = 0;
     
     $scope.submit_reg=function(){
         var categories = $scope.categories;
@@ -54,7 +54,17 @@ angular.module('poiApp')
             //Second function handles error
             $scope.countries = "Something went wrong";
         });
-
+        
+        $scope.updateTotal = function(item) {
+            console.log(item);
+      
+            if (item) {
+              $scope.totalSelected++;
+            }
+            else {
+              $scope.totalSelected--;
+            }
+        }
 
 }])
 

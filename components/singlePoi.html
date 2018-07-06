@@ -37,13 +37,13 @@
                     </tbody>
                 </table>
                 <div ng-hide="review">
-                  <form name="reviewform" class="form-group" ng-submit="submitReview(userRating,userReview)">
+                  <form name="reviewform" class="form-group" ng-submit="reviewform.$valid && submitReview(userRating,userReview)">
                           <label for="rating_label">Rating:</label>
-                          <input name="rating" id="rating_label" type="text" ng-model="userRating"  class="form-control" ng-pattern="^(?:[1-5])$">
-                          <p ng-show="reviewform.rating.$error.ng-pattern" style="color:red;">rating must be in range 1 - 5</p>
+                          <input name="userRating" id="rating_label" type="text" ng-model="userRating"  class="form-control" ng-pattern="/^(?:[1-5])$/" required>
+                          <p ng-show="reviewform.userRating.$touched && reviewform.userRating.$invalid" style="color:red;">rating must be in range 1 - 5</p>
                           <label for="review_label">Review:</label>
                           <input id="review_label" type="textarea" ng-model="userReview" class="form-control">
-                          <input class="btn btn-primary" type="submit" value="submit"/>
+                          <input class="btn btn-primary" type="submit" value="submit" ng-disabled="reviewform.$invalid"/>
                   </form>
             </div>
 

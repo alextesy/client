@@ -16,64 +16,77 @@
             <div class="form-group">
                 <label for="regusername"> Username:</label>    
                 <input name="regusername" type="text" id="regusername"  ng-model="user.username"  class="form-control" placeholder="Enter username" ng-minlength="3" ng-maxlength="8"  required ></br>
-                <p ng-show="register.regusername.$error.minlength" style="color:red;">username must be atleast 3 letters</p>
+                <p ng-show="register.regusername.$error.minlength && register.regusername.$touched" style="color:red;">username must be atleast 3 letters</p>
                 <p ng-show="register.regusername.$error.maxlength" style="color:red;">username must be max 8 letters</p>
             </div>
             <div class="form-group">
                 <label for="passreg">Password:</label>     
-                <input type="password" name="passreg"  id="passreg" class="form-control" placeholder="Enter password"  ng-model="user.password" ng-minlength="5" ng-maxlength="10" ng-required="true"  pattern = "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" title="enter at least one uppercase letter and digit"></br>
-                <p ng-show="register.passreg.$error.minlength" style="color:red;">password must be atleast 5 letters</p>
+                <input type="password" name="passreg"  id="passreg" class="form-control" placeholder="Enter password"  ng-model="user.password" ng-minlength="5" ng-maxlength="10" required  ng-pattern = "/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/" title="enter at least one uppercase letter and digit"></br>
+                <p ng-show="register.passreg.$error.minlength && register.passreg.$touched" style="color:red;">password must be atleast 5 letters</p>
                 <p ng-show="register.passreg.$error.maxlength" style="color:red;">password must be max 10 letters</p>
+                <p ng-show="register.passreg.$touched && register.passreg.$error.pattern" style="color:red;">enter at least one uppercase letter and digit </p>
                
             </div>
             <div class="form-group">   
                 Firset Name: 
-                <input type="text"  class="form-control" placeholder="Enter First Name"   ng-model="user.firstname" pattern="[A-Za-z]+" title="characters only" required></br>
+                <input type="text" name ="firstname"   class="form-control" placeholder="Enter First Name"   ng-model="user.firstname" pattern="[A-Za-z]+" title="characters only" required></br>
+                <p ng-show="register.firstname.$invalid && register.firstname.$touched " style="color:red;">this field required</p>
+                <p ng-show="register.firstname.$error.pattern && register.firstname.$touched " style="color:red;">characters only</p>
             </div>
             <div class="form-group">      
                 Last Name:   
-                <input type="text"   class="form-control" placeholder="Enter Last Name"   ng-model="user.lastname" pattern="[A-Za-z]+" title="characters only" required></br>
+                <input type="text"  name="lastname" class="form-control" placeholder="Enter Last Name"   ng-model="user.lastname" pattern="[A-Za-z]+" title="characters only" required></br>
+                <p ng-show="register.lastname.$invalid && register.lastname.$touched " style="color:red;">this field required</p>
+                <p ng-show="register.lastname.$error.pattern && register.lastname.$touched " style="color:red;">characters only</p>
             </div>
             <div class="form-group">   
                 Country:   
-                <select ng-model='user.country'  class="form-control" placeholder="Enter username"   ng-options="x.Name for x in countries.Countries.Country" required></select></br>
+                <select ng-model='user.country'  name="country" class="form-control" placeholder="Enter username"   ng-options="x.Name for x in countries.Countries.Country" required></select></br>
+                <p ng-show="register.country.$touched && register.country.$invalid" style="color:red;">please choose country</p>
             </div> 
             <div class="form-group">      
                 City:        
-                <input type="text" class="form-control" placeholder="Enter City" ng-model="user.city" required ></br>
+                <input type="text" name="city" class="form-control" placeholder="Enter City" ng-model="user.city" required ></br>
+                <p ng-show="register.city.$touched && register.city.$invalid" style="color:red;">this field required</p>
             </div>
             <div class="form-group">      
                 Email:       
-                <input type="email" class="form-control" placeholder="bob@gmail.com" ng-model="user.email" required></br>
+                <input type="email" name="email" class="form-control" placeholder="bob@gmail.com" ng-model="user.email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  required></br>
+                <p ng-show="register.email.$touched && register.email.$invalid" style="color:red;">enter valid email</p>
             </div>
             <div class="form-group">       
                 First question: 
-                <select class="form-control"  ng-model="user.questions[0]" ng-options="x.question for x in questionslist" required></select >
+                <select name="questions1" class="form-control"  ng-model="user.questions[0]" ng-options="x.question for x in questionslist" required></select >
+                <p ng-show="register.questions1.$touched && register.questions1.$invalid" style="color:red;">please choose question</p>
             </div>
             <div class="form-group">   
                 answer: 
-                <input class="form-control" placeholder="Enter First Answer" type="text" ng-model="user.answers[0]"required></br>
+                <input name= "answer1" class="form-control" placeholder="Enter First Answer" type="text" ng-model="user.answers[0]"required></br>
+                <p ng-show="register.answer1.$touched && register.answer1.$invalid" style="color:red;">this field required</p>
             </div>
             <div class="form-group"> 
                 Second question:
-                <select class="form-control" ng-model="user.questions[1]" ng-options="x.question for x in questionslist" required></select>
+                <select name = "questions2" class="form-control" ng-model="user.questions[1]" ng-options="x.question for x in questionslist" required></select>
+                <p ng-show="register.questions2.$touched && register.questions2.$invalid" style="color:red;">please choose question</p>
             </div>  
             <div class="form-group"> 
                 answer: 
-                <input type="text" class="form-control" placeholder="Enter Second Answer" ng-model="user.answers[1]"required></br>
+                <input name="answer2" type="text" class="form-control" placeholder="Enter Second Answer" ng-model="user.answers[1]"required></br>
+                <p ng-show="register.answer2.$touched && register.answer2.$invalid" style="color:red;">this field required</p>
             <div class="form-group"> 
             </div> 
                 Choose Your Favorite Categories: </br>
                 <table>
                 <tr ng-repeat="x in categories">
-                    <td>{{x.categories}}</td><td><input  type="checkbox" ng-model="x.checked" value="true" ></td>
+                    <td>{{x.categories}}</td><td><input name="category"  ng-change="updateTotal(x.checked)" type="checkbox" ng-model="x.checked" value="true" ></td>
                 </tr>
                 </table>
+                Total checked: {{totalSelected}}
                 <br>
                 <br>
-                <input type="submit" class="btn btn-primary" value="Register" />
-                {{selectedquestion1}}
-                {{selectedquestion2}}
+                <p ng-show="totalSelected < 2" style="color:red;">choose at least two categories</p>
+                <input type="submit" class="btn btn-primary" value="Register" ng-disabled="register.$invalid || totalSelected < 2"/>
+   
         </form>
     </div>
 </div>
