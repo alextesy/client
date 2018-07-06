@@ -25,8 +25,8 @@ angular.module('poiApp')
             }
              Promise.all(arrPromise2)
             .then(function(result2){
-                catImg.push({"image":result2[0].data.images[0].image,"ID":result2[0].data.poidetails[0].ID});
-                catImg.push({"image":result2[1].data.images[0].image,"ID":result2[1].data.poidetails[0].ID});
+                catImg.push({"image":result2[0].data.images[0].image,"ID":result2[0].data.poidetails[0].ID,"name":result2[0].data.poidetails[0].name});
+                catImg.push({"image":result2[1].data.images[0].image,"ID":result2[1].data.poidetails[0].ID, "name":result2[1].data.poidetails[0].name});
               
                 $scope.catImg=catImg;
                 $scope.showimgs = true;
@@ -53,8 +53,8 @@ angular.module('poiApp')
             }
             Promise.all(arrLastSaved)
             .then(function(result4){
-                lastSavedimg.push({"image":result4[0].data.images[0].image,"ID":result4[0].data.poidetails[0].ID});
-                lastSavedimg.push({"image":result4[1].data.images[0].image,"ID":result4[1].data.poidetails[0].ID});
+                lastSavedimg.push({"image":result4[0].data.images[0].image,"ID":result4[0].data.poidetails[0].ID,"name":result4[0].data.poidetails[0].name});
+                lastSavedimg.push({"image":result4[1].data.images[0].image,"ID":result4[1].data.poidetails[0].ID,"name":result4[1].data.poidetails[0].name});
                 $scope.lastSavedimg=lastSavedimg;
                 $scope.showimgs = true;
                 $scope.$apply();
