@@ -21,9 +21,10 @@
             </div>
             <div class="form-group">
                 <label for="passreg">Password:</label>     
-                <input type="password" name="passreg"  id="passreg" class="form-control" placeholder="Enter password"  ng-model="user.password" ng-minlength="5" ng-maxlength="10" ng-required="true" required pattern = "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" title="enter at least one uppercase letter and digit"></br>
-                <p ng-show="register.passreg.$error.minlength" style="color:red;">username must be atleast 3 letters</p>
-                <p ng-show="register.passreg.$error.maxlength" style="color:red;">username must be max 8 letters</p>
+                <input type="password" name="passreg"  id="passreg" class="form-control" placeholder="Enter password"  ng-model="user.password" ng-minlength="5" ng-maxlength="10" ng-required="true"  pattern = "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" title="enter at least one uppercase letter and digit"></br>
+                <p ng-show="register.passreg.$error.minlength" style="color:red;">password must be atleast 5 letters</p>
+                <p ng-show="register.passreg.$error.maxlength" style="color:red;">password must be max 10 letters</p>
+               
             </div>
             <div class="form-group">   
                 Firset Name: 

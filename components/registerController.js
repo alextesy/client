@@ -47,8 +47,8 @@ angular.module('poiApp')
         });
         $http.get(serverUrl + "users/countries")
         .then(function(response){
-            $scope.countries=response.data
-            console.log($scope.countries)
+            $scope.countries=response.data;
+   
         },
         function (response) {
             //Second function handles error

@@ -3,7 +3,7 @@ angular.module("poiApp")
         let serverUrl='http://localhost:3000/'
         self=this;
         $scope.poiorder=[];
-        
+        $scope.favorites = [];
         
         var mymap = L.map('mapid').setView([40.782281, -73.969151], 12);
         L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {

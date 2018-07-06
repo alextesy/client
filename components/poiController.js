@@ -15,7 +15,7 @@ angular.module('poiApp')
             return false;
         }
        $scope.categories = response.data;
-       $scope.enabled = [];
+       
        getALLPOI.get()
        .then(function(response){
            var poiArr=[]
@@ -24,6 +24,7 @@ angular.module('poiApp')
                 poi.image=response[i].data.images[0].image;
                 poi.reviews=response[i].data.reviews;
                 poiArr.push(poi);
+              
            }
             var localpois=getlocalpois.get_local_pois();
             var Dbpois=dbpois.get_dbpois();
@@ -37,10 +38,12 @@ angular.module('poiApp')
            }
            for(var i =0; i <$scope.pois.length;i++){
                if($scope.checkIfExists(Dbpois,$scope.pois[i])&&!$scope.checkIfExists(deletepois,$scope.pois[i])){ 
-                    $scope.enabled[i]= true;
+                   
+                    $scope.pois[i].favorite = true;
                 }
                 else if($scope.checkIfExists(localpois,$scope.pois[i])){
-                    $scope.enabled[i]=true;
+            
+                    $scope.pois[i].favorite = true;
                 }
             }
 
@@ -57,8 +60,8 @@ angular.module('poiApp')
     $scope.checkpoi = function(index){
         var DBpois=dbpois.get_dbpois();
         var deletepoi=localdeletepois.get_local_deletepois();
-        if($scope.enabled[index] == false||!$scope.enabled[index]){
-            $scope.enabled[index] = true;
+        if( $scope.pois[index].favorite == false){
+            $scope.pois[index].favorite = true;
             if(!$scope.checkIfExists(DBpois,$scope.pois[index])){
                 getlocalpois.update_local_pois($scope.pois[index]);
             }
@@ -67,7 +70,7 @@ angular.module('poiApp')
             }
         }
         else{
-            $scope.enabled[index] = false;
+            $scope.pois[index].favorite = false;
             
             if($scope.checkIfExists(DBpois,$scope.pois[index])){
                 localdeletepois.update_local_deletepois($scope.pois[index]);
@@ -79,6 +82,9 @@ angular.module('poiApp')
     }
     $scope.sendPOI=function(id){
         $rootScope.$broadcast('poi',id);
+    }
+    $scope.showfav = function(){
+  
     }
 }]);
 
