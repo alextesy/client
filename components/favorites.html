@@ -49,7 +49,7 @@
                                         <div class="btn-group">
                                             <button type="button" ng-click="sendPOI(poiarray[x].ID)" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#myModal">View</button>
                                             <button type="button" ng-click="updatepostion_up($index)" class="btn btn-sm btn-outline-secondary" ng-show='$index !=0'>up</button>
-                                            <button type="button"  ng-click="updatepostion_down($index)" class="btn btn-sm btn-outline-secondary" ng-show='$index !=poiarray.length-1' >down</button>
+                                            <button type="button"  ng-click="updatepostion_down($index)" class="btn btn-sm btn-outline-secondary" ng-hide='$last' >down</button>
                                         </div>
                             
                                     </div>
