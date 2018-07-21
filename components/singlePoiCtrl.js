@@ -18,30 +18,34 @@ angular.module('poiApp')
     }
   
     $scope.$on('poi',function(response,oArgs){
-        $scope.login = $rootScope.login;  
-        $http.get(serverUrl+'POI/'+oArgs)
+        $scope.login = $rootScope.login;
+        $http.get(serverUrl+'POI/updateNumOfViews/'+oArgs)
         .then(function(result){
-            $scope.poi=result.data.poidetails[0];
-            $scope.poi.image=result.data.images[0].image;
-            $scope.poi.reviews=result.data.reviews;
-            if($scope.poi.reviews.length==0){
-                $scope.flag[$scope.poi.ID]=true;
-            }
-            var localpois=getlocalpois.get_local_pois();
-            var Dbpois=dbpois.get_dbpois();
-            var deletepois=localdeletepois.get_local_deletepois();
-            if($scope.checkIfExists(Dbpois,$scope.poi)){
-                    if(!$scope.checkIfExists(deletepois,$scope.poi)){
+            $http.get(serverUrl+'POI/'+oArgs)
+            .then(function(result){
+                $scope.poi=result.data.poidetails[0];
+                $scope.poi.image=result.data.images[0].image;
+                $scope.poi.reviews=result.data.reviews;
+                if($scope.poi.reviews.length==0){
+                    $scope.flag[$scope.poi.ID]=true;
+                }
+                var localpois=getlocalpois.get_local_pois();
+                var Dbpois=dbpois.get_dbpois();
+                var deletepois=localdeletepois.get_local_deletepois();
+                if($scope.checkIfExists(Dbpois,$scope.poi)){
+                        if(!$scope.checkIfExists(deletepois,$scope.poi)){
+                            $scope.enabled[$scope.poi.ID]=true;
+                        }
+                    
+                }
+                else if($scope.checkIfExists(localpois,$scope.poi)){
                         $scope.enabled[$scope.poi.ID]=true;
-                    }
-                
-            }
-            else if($scope.checkIfExists(localpois,$scope.poi)){
-                    $scope.enabled[$scope.poi.ID]=true;
-            }
-
-
-        })
+                }
+    
+    
+            })
+        })  
+    
     });
     $scope.openreview = function(){
         $scope.review = false;

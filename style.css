@@ -279,6 +279,18 @@ hr{
     flex: 1;
   }
 }
+.button-design {
+  cursor: pointer;
+ }
+ #homeDiv {
+
+  background-image:url(https://vastphotos.com/files/uploads/photos/10125/black-white-nyc-skyline-hudson-l.jpg);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 30%;
+  background-position: 0px -270px;
+ }
 
 .overflow-hidden { overflow: hidden; }
 

@@ -15,16 +15,16 @@
             <tr >
                 <th scope="col">#</th>
                 <th scope="col">Name <input type="text" ng-model="name_filter"> </th>
-                <th scope="col">category <select type="text" ng-model = "cat_filter" ng-options="x.categories for x in categories"></select></th>
-                <th scope="col">rating <input type="text" ng-model="rating_filter"> </th>
-                <th scope="col"> numOfViews <input type="text" ng-model="numv_filter"> </th>
-                <th scope="col" ng-show="login"> favorites <input type="checkbox"  ng-model="favorite_filter" ng-false-value="" ng-click= "showfav()" ng-true-value="true"> </th>
+                <th scope="col">Category <select type="text" ng-model = "cat_filter" ng-options="x.categories for x in categories"></select></th>
+                <th scope="col" class="button-design" ng-click="orderByField='rating'; reverseSort = !reverseSort">Rating</th>
+                <th scope="col" class="button-design" ng-click="orderByField='numOfViews'; reverseSort = !reverseSort"> #OfViews </th>
+                <th scope="col" ng-show="login"> Favorites <input type="checkbox"  ng-model="favorite_filter" ng-false-value="" ng-click= "showfav()" ng-true-value="true"> </th>
                 <th scope="col"> <button ng-click = "clearfilter()" >reset filter</button> </th>
                
 
             </tr>
             </thead>
-            <tbody ng-repeat="x in pois | filter:{name: name_filter, category:cat_filter.categories, rating:rating_filter,numOfViews:numv_filter,favorite:favorite_filter}">
+            <tbody ng-repeat="x in pois |orderBy:orderByField:reverseSort| filter:{name: name_filter, category:cat_filter.categories,favorite:favorite_filter}">
             <tr>
                 <th scope="row">{{$index}}</th>
                 <td class="poitable-td" ng-click="sendPOI(x.ID)" data-toggle="modal" data-target="#myModal">{{x.name }}</td>

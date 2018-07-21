@@ -2,6 +2,10 @@ angular.module('poiApp')
 .controller('poiController',['getCategories','getALLPOI','$location','$scope','$http','$rootScope','getlocalpois','localdeletepois','dbpois','updatecounter',function(getCategories,getALLPOI,$location,$scope,$http,$rootScope,getlocalpois,localdeletepois,dbpois,updatecounter) {
     let serverUrl='http://localhost:3000/'
     self=this;
+
+    $scope.orderByField = 'rating';
+    $scope.reverseSort = false;
+
     getCategories.get().then(function(response){
         $scope.checkIfExists=function(arr,poi){
             if(arr){
@@ -47,7 +51,6 @@ angular.module('poiApp')
                 }
             }
 
-           console.log("");
         })
     })
     $scope.clearfilter = function(){

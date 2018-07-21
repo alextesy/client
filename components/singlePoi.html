@@ -18,7 +18,7 @@
             <img class="card-img-top" ng-src="{{poi.image}}" alt="Card image cap">
             <p>{{poi.description}}</p>
              <p>Num of views: {{poi.numOfViews}}</p>
-            <p>Rating: {{poi.rating}}</p>
+            <p>Rating: {{poi.rating.toFixed(1)}}</p>
             <table class="table" ng-hide="flag[poi.ID]">
                     <thead class="thead-dark">
                     <tr >
