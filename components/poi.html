@@ -1,13 +1,12 @@
 </br>
 </br>
-</br>
-</br>
-</br>
 
 
+<div id='poipage'>
+    <h1> Points Of Interest </h1>
 
+</div>
 
-<h1> Points Of Interest </h1>
 
 <div ng-controller="poiController">
     <table id="poitable" ng-hide="flag" class="table" >
@@ -31,7 +30,7 @@
                 <td>{{x.category}}</td>
                 <td>{{x.rating | number : 1}}</td>
                 <td>{{x.numOfViews}}</td>
-                <td ng-show="login" ng-click="checkpoi($index)" class="fa fa-star" ng-class="{checked: x.favorite}"></td>
+                <td ng-show="login" ng-click="checkpoi(x.ID)" class="fa fa-star" ng-class="{checked: x.favorite}"></td>
             </tr>
             </tbody>
         </table>

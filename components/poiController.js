@@ -49,6 +49,10 @@ angular.module('poiApp')
             
                     $scope.pois[i].favorite = true;
                 }
+                else{
+                    $scope.pois[i].favorite = false;
+
+                }
             }
 
         })
@@ -62,7 +66,15 @@ angular.module('poiApp')
     }
     $scope.checkpoi = function(index){
         var DBpois=dbpois.get_dbpois();
+        var checkPoi;
         var deletepoi=localdeletepois.get_local_deletepois();
+        for (var i =0;i<$scope.pois.length;i++){
+            if($scope.pois[i].ID===index){
+                index=i;
+                break;
+            }
+        }
+
         if( $scope.pois[index].favorite == false){
             $scope.pois[index].favorite = true;
             if(!$scope.checkIfExists(DBpois,$scope.pois[index])){

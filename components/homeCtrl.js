@@ -1,8 +1,12 @@
 angular.module('poiApp')
-.controller('homeCtrl', ['$location','$scope','$http','setHeadersToken','localStorageModel','setUser','$rootScope','dbpoisinit','updatecounter',function($location,$scope,$http,setHeadersToken,localStorageModel,setUser,$rootScope,dbpoisinit,updatecounter) {
+.controller('homeCtrl', ['Authservice','$location','$scope','$http','setHeadersToken','localStorageModel','setUser','$rootScope','dbpoisinit','updatecounter',function(Authservice,$location,$scope,$http,setHeadersToken,localStorageModel,setUser,$rootScope,dbpoisinit,updatecounter) {
     
     let serverUrl='http://localhost:3000/'
     self=this;
+    if(!Authservice.check()){
+        $location.path('/');
+        return;
+    }
     $scope.sendPOI=function(id){
         $rootScope.$broadcast('poi',id);
     }

@@ -1,6 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,800');
 
+#menu{
+  position: fixed;
+  width: 100%;
+  z-index:10000 ;
+  top: 0;
+  background-color: #A9A9A9	;
+}
+.menuimgs{
+  display: inline-block;
 
+}
 #username{
     color: white;
 }
@@ -242,11 +252,17 @@ hr{
 #mainabout{
   background-image: url("https://lonelyplanetimages.imgix.net/mastheads/GettyImages-538096543_medium.jpg?sharp=10&vib=20&w=1200");
   color: White;
+  background-repeat: no-repeat;
+  background-size: cover;
+
 
 }
 #about1{
   background-image: url("http://media.guestofaguest.com/t_article_content/gofg-media/2016/05/1/46251/13113993_561484980696845_1656624708_n.jpg");
-  color: black;
+  color: #800000;
+  background-repeat: no-repeat;
+  background-size: cover;
+
 }
 #about11{
   color: white;
@@ -255,7 +271,9 @@ hr{
 }
 #about2{
   background-image: url("http://media.guestofaguest.com/t_article_content/gofg-media/2016/05/1/46251/13092444_227594704280610_744327126_n.jpg");
-  
+  background-repeat: no-repeat;
+  background-size: cover;
+
 }
 #about21{
   color: black;
@@ -289,7 +307,16 @@ hr{
   background-repeat: no-repeat;
   background-size: cover;
   height: 30%;
-  background-position: 0px -270px;
+  background-position: 0px -320px;
+ }
+ #poipage{
+
+  background-image:url(https://vastphotos.com/files/uploads/photos/10125/black-white-nyc-skyline-hudson-l.jpg);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 30%;
+  background-position: 0px -320px;
  }
 
 .overflow-hidden { overflow: hidden; }

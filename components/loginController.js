@@ -1,7 +1,8 @@
 angular.module('poiApp')
-.controller('loginController', ['$location','$scope','$http','setHeadersToken','localStorageModel','$rootScope' ,function($location,$scope,$http,setHeadersToken,localStorageModel,$rootScope) {
+.controller('loginController', ['Authservice','$location','$scope','$http','setHeadersToken','localStorageModel','$rootScope' ,function(Authservice,$location,$scope,$http,setHeadersToken,localStorageModel,$rootScope) {
     let serverUrl='http://localhost:3000/'
     self=this;
+   
     $scope.sendPOI=function(id){
         $rootScope.$broadcast('poi',id);
     }
@@ -12,7 +13,7 @@ angular.module('poiApp')
             self.token = response.data.token;
             setHeadersToken.set(self.token)
             self.addTokenToLocalStorage();
-            alert("success");
+            alert("You have logged in Successfully");
             $scope.user.startname=$scope.user.username;
             $http.post(serverUrl + "Users/log")
             .then(function(result){

@@ -37,7 +37,6 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
     })
     $routeProvider.when('/about', {
         templateUrl: 'components/about.html',
-        controller : 'aboutController',
     })
     .otherwise({ redirectTo: '/' });
         
@@ -55,7 +54,6 @@ app.config(['$locationProvider', '$routeProvider', function($locationProvider, $
             .then(function(result){
                 $rootScope.login=true;
                 $rootScope.user = setUser.getUser();
-                $location.path('/home');
             
                 updatecounter.update();
                 return;

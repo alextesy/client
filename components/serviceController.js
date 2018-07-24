@@ -25,7 +25,8 @@ angular.module('poiApp')
             return $http.post(serverUrl+'Users/validation')
             .then(function(result){
                      $rootScope.login=true;
-                     $location.path('/home');
+                     
+                     //$location.path('/home');
                
             },function(err){
                 $rootScope.login=false;

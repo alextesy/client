@@ -10,8 +10,8 @@
         </head>
         
         <body ng-app="poiApp" ng-controller="indexCtrl">
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark" ng-init="user.startname='Guest'">
-                        <a class="navbar-brand" href="#">Home</a>
+                <nav id='menu' class="navbar navbar-expand-lg navbar-dark bg-secondary" ng-init="user.startname='Guest'">
+                        <a class="navbar-brand" href="#/home">Home</a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                           <span class="navbar-toggler-icon"></span>
                         </button>
@@ -27,11 +27,23 @@
                               <a class="nav-link disabled" href="#/register" ng-hide="login">Register</a>
                             </li>
                             <li class="nav-item">
-                                    <a class="nav-link disabled" href="#/favorites" ng-show="login">Favorites</a>
+                                    <a class="nav-link" href="#/favorites" ng-show="login">Favorites</a>
                             </li>
                           </ul>
                           <span id="username" class="logout" href="#" class = "navbar-text ml-auto" ng-click="deleteLocalStorage()" ng-show="login" style="cursor: pointer;" >Logout</span>
+                          <div id="menuimg">
+                            <center><img class="menuimgs" src="https://d30y9cdsu7xlg0.cloudfront.net/png/36684-200.png" height="42" width="42"/>
+                            <img class="menuimgs"src="http://www.iconarchive.com/download/i89104/icons8/ios7/Travel-Statue-Of-Liberty.ico" height="42" width="42"/>
+                            <img class="menuimgs"src="http://pluspng.com/img-png/new-york-yankees-logo-vector-png-logo-new-york-yankee-icon-png-50-px-1600.png" height="42" width="42"/>
+                            <img class="menuimgs"src="https://cdn1.iconfinder.com/data/icons/us-states-maps-1/65/New_York-512.png" height="42" width="42"/>
+                            <img class="menuimgs" src="https://image.flaticon.com/icons/svg/53/53112.svg" height="42" width="42"/>
+
+                            <img class="menuimgs" src="https://cdn4.iconfinder.com/data/icons/new-york-4/100/NewYork_America_Travel_City_-144-256.png" height="42" width="42"/>
+
+                            <img class="menuimgs"src="https://cdn4.iconfinder.com/data/icons/new-york-4/100/NewYork_America_Travel_City_-185-256.png" height="42" width="42"/>
+                        </div></center>
                         </div>
+
                         <div class="button" ng-show="login">
                             <i ng-click="gotofavorites()" class="fa fa-map-marker" style="font-size: 1.73em; cursor: pointer;"></i>
                             <span class="button__badge" ng-model="counterpoi">{{counterpoi}}</span>

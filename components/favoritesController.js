@@ -1,5 +1,9 @@
 angular.module("poiApp")
-    .controller('favoritesController', ['$location','$scope','$http','localStorageService','getlocalpois','dbpois','localdeletepois',function($location,$scope,$http,localStorageService,getlocalpois,dbpois,localdeletepois) {
+    .controller('favoritesController', ['$location','$scope','$http','localStorageService','getlocalpois','dbpois','localdeletepois','Authservice',function($location,$scope,$http,localStorageService,getlocalpois,dbpois,localdeletepois,Authservice) {
+        if(!Authservice.check()){
+            return;
+        }
+        
         let serverUrl='http://localhost:3000/'
         self=this;
         $scope.poiorder=[];
@@ -164,7 +168,7 @@ angular.module("poiApp")
         $scope.addmarker = function(poi){
             for(var i in poi){
                 var marker = L.marker([	poi[i].latitude, poi[i].longitude]).addTo(mymap);
-                marker.bindPopup("<b>"+poi[i].name +"!</b><br>I am a popup.").openPopup();        
+                marker.bindPopup("<b>"+poi[i].name +"!</b><br>").openPopup();        
             }
         }
 

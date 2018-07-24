@@ -81,7 +81,13 @@ angular.module('poiApp')
         if(userReview){
             var post={poiID:$scope.poi.ID,
                 review:userReview}
-            $http.post(serverUrl+'users/log/review',post);
+            $http.post(serverUrl+'users/log/review',post)
+            .then(function(result){
+                alert("Your review has been submitted");
+            }) 
+            .catch(function(err){
+                alert("You have already reviewed this site");
+            })      
         }
         if(userRating){
             var post={poiID:$scope.poi.ID,
@@ -89,7 +95,6 @@ angular.module('poiApp')
             $http.post(serverUrl+'users/log/rating',post);
 
         }
-        alert("pois saved successfully");
         $scope.review = false;
     
             
